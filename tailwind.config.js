@@ -10,7 +10,9 @@ module.exports = {
       transparent: 'transparent',
       current: 'currentColor',
       boxBackgroundColor: '#121212',
-      pageBackgroundColor: '#000'
+      pageBackgroundColor: '#000',
+      linkColor: '#b3b3b3',
+      white: '#ffffff'
     }
   },
   plugins: [],

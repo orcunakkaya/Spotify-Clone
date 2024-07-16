@@ -31,3 +31,23 @@
     text-wrap: balance;
   }
 }
+
+.logo-hover-color{
+  color: #b3b3b3;
+    fill: #b3b3b3;
+  svg, img{
+    color: #b3b3b3;
+    fill: #b3b3b3;
+  }
+}
+
+.logo-hover-color:hover{
+
+    fill: white!important;
+    color: white!important;
+    svg{
+      fill: white!important;
+      color: white!important;
+    }
+
+}
