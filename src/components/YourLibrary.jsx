@@ -1,9 +1,21 @@
-import React from 'react'
+import React from "react";
+import Library from "../../public/assets/Library";
+import Plus from "../../public/assets/Plus";
 
 const YourLibrary = () => {
   return (
-    <div>YourLibrary</div>
-  )
-}
+    <div className="bg-boxBackgroundColor rounded-lg py-6 px-3 grid gap-y-2 ">
+      <div className="flex justify-between items-center">
+        <button className="text-linkColor flex items-center gap-x-5 hover:text-white">
+          <Library />
+          <div className="font-bold text-base">Kitaplığın</div>
+        </button>
+        <button className="text-linkColor hover:text-white hover:bg-white hover:bg-opacity-25 p-2 rounded-full">
+          <Plus />
+        </button>
+      </div>
+    </div>
+  );
+};
 
-export default YourLibrary
+export default YourLibrary;
