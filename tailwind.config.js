@@ -12,7 +12,8 @@ module.exports = {
       boxBackgroundColor: '#121212',
       pageBackgroundColor: '#000',
       linkColor: '#b3b3b3',
-      white: '#ffffff'
+      white: '#ffffff',
+      blue: '#5179a1'
     }
   },
   plugins: [],
