@@ -2,6 +2,7 @@ import Image from "next/image";
 import SideBar from "@/components/SideBar";
 import YourLibrary from "@/components/YourLibrary";
 import Navbar from '@/components/Navbar';
+import Content from "@/components/Content";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
         <Navbar />
         {/* <SideBar /> */}
         <YourLibrary />
+        <Content />
       </div>
       
     </div>

@@ -25,15 +25,15 @@ const Navbar = () => {
           <Home />
         </Link>
 
-        <div class="relative rounded-3xl shadow-sm bg-boxBackgroundColor h-12 w-full">
-          <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-            <span class="text-linkColor sm:text-sm hover:text-white"><Search /></span>
+        <div className="relative rounded-3xl shadow-sm bg-boxBackgroundColor h-12 w-full">
+          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+            <span className="text-linkColor sm:text-sm hover:text-white"><Search /></span>
           </div>
           <input
             type="text"
             name="price"
             id="price"
-            class="block bg-boxBackgroundColor w-full rounded-3xl border-0 py-1.5 h-12 pl-9 pr-4 text-linkColor placeholder:linkColor sm:text-sm sm:leading-6 indent-3"
+            className="block bg-boxBackgroundColor w-full rounded-3xl border-0 py-1.5 h-12 pl-9 pr-4 text-linkColor placeholder:linkColor sm:text-sm sm:leading-6 indent-3"
             placeholder="Ne çalmak istiyorsun?"
           />
         </div>
