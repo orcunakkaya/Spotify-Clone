@@ -8,7 +8,7 @@ export default async function Home() {
   return (
     <div className="grid grid-cols-5">
       {categories.map((category, index) => (
-        <CategoryCard category={category} index={index} />
+        <CategoryCard category={category} key={index} />
       ))}
     </div>
   );

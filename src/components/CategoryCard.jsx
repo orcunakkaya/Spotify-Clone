@@ -3,10 +3,10 @@ import React from 'react'
 import Image from 'next/image';
 
 const CategoryCard = ({ category, index }) => {
-    console.log("category",category.icons[0].url, category.name, index)
+
   return (
-    <div className='p-3 '>
-            <div  className='raunded-lg w-fit relative'>
+    <div className='p-3'>
+            <Link href={`/genre/${category.id}`} className='raunded-lg w-fit relative'>
             <Image
                 src={category.icons[0].url}
                 alt={category?.name}
@@ -16,7 +16,7 @@ const CategoryCard = ({ category, index }) => {
                 className='rounded-lg'
             />
             <div className='absolute top-4 left-4 text-white font-bold text-2xl'>{category.name}</div>
-            </div>
+            </Link>
     </div>
   )
 }
