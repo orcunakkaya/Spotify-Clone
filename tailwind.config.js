@@ -14,7 +14,7 @@ module.exports = {
       linkColor: '#b3b3b3',
       white: '#ffffff',
       blue: '#5179a1'
-    }
+    },
   },
   plugins: [],
 };
