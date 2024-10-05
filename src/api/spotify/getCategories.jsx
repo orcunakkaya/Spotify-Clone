@@ -6,6 +6,7 @@ const getCategories = async (accessToken) => {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
+        cache: 'no-store'
       });
       const data = await response.json();
       return data.categories.items;

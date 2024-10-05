@@ -4,6 +4,7 @@ const getToken = async () => {
       method: "post",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `grant_type=client_credentials&client_id=${process.env.SPOTIFY_CLIENT_ID}&client_secret=${process.env.SPOTIFY_CLIENT_SECRET}`,
+      cache: 'no-store'
     };
     const response = await fetch(
       "https://accounts.spotify.com/api/token",
@@ -11,6 +12,7 @@ const getToken = async () => {
     );
     const data = await response.json();
     return data.access_token;
+
   } catch (error) {
     console.error("Error fetching access token:", error);
     throw error;

@@ -1,19 +1,13 @@
-import Image from "next/image";
-import SideBar from "@/components/SideBar";
-import YourLibrary from "@/components/YourLibrary";
-import Navbar from '@/components/Navbar';
-import Content from "@/components/Content";
+import getToken from '../api/auth/getToken.jsx';
+import getCategories from '../api/spotify/getCategories.jsx';
 
-export default function Home() {
+export default async function Home() {
+  const token = await getToken();
+  const categories = await getCategories(token);
+
   return (
-    <div className="h-full p-2 bg-pageBackgroundColor">
-      <div className="flex flex-col h-full gap-2">
-        <Navbar />
-        {/* <SideBar /> */}
-        <YourLibrary />
-        <Content />
-      </div>
-      
+    <div>
+        
     </div>
   );
 }
