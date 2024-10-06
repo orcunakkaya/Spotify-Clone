@@ -6,7 +6,7 @@ import Search from '../../public/assets/Search';
 
 const Navbar = () => {
   return (
-    <div className="flex items-center justify-between">
+    <nav className="flex items-center justify-between w-full">
       <Link href="/" className="flex items-center">
         <Image
           src="/assets/spotify.svg"
@@ -44,7 +44,7 @@ const Navbar = () => {
             O
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 

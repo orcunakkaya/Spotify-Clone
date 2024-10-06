@@ -5,7 +5,7 @@ import Footer from "./Footer";
 
 const YourLibrary = () => {
   return (
-    <div className="bg-boxBackgroundColor rounded-lg px-4 pt-3 pb-2 flex flex-col gap-y-2 max-h-full justify-between grow">
+    <div className="bg-boxBackgroundColor rounded-lg px-4 pt-3 pb-2 flex flex-col gap-y-2 h-full justify-between grow">
       <div className="flex justify-between items-center ">
         <button className="text-linkColor flex items-center gap-x-5 hover:text-white">
           <Library />

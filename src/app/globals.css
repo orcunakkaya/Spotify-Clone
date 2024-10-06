@@ -26,9 +26,9 @@
     rgb(var(--background-start-rgb));
 } */
 
-body{
+/* body{
   height: 100vh;
-}
+} */
 
 @layer utilities {
   .text-balance {
