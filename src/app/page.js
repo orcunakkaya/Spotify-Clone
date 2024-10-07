@@ -6,7 +6,7 @@ export default async function Home() {
   const token = await getToken();
   const categories = await getCategories(token);
   return (
-    <div className="grid gap-6" style={{gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))'}}>
+    <div className="grid gap-6" style={{gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))'}}>
       {categories.map((category, index) => (
         <CategoryCard category={category} key={index} />
       ))}

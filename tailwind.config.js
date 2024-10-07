@@ -15,6 +15,9 @@ module.exports = {
       white: '#ffffff',
       blue: '#5179a1'
     },
+    rotate: {
+      '25': '25deg'
+    }
   },
   plugins: [],
 };
