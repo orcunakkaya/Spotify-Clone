@@ -35,3 +35,28 @@
     text-wrap: balance;
   }
 }
+
+div::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+  z-index: 2;
+  position: absolute;
+}
+div::-webkit-scrollbar-track {
+  background: transparent;      /* color of the tracking area */
+  background-clip: border-box;
+  position: relative;
+}
+
+div::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);    /* color of the scroll thumb */
+      /* roundness of the scroll thumb */
+  border: none;  /* creates padding around scroll thumb */
+  background-clip: border-box;
+  border-image-width: 1;
+  min-height: 30px;
+  position: absolute;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+  height: 180px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
