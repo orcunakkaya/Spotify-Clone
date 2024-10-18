@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
               </div>
               
               <div className="flex-1 max-h-full m-4  ">
-              <div className="bg-boxBackgroundColor mb-8 rounded-lg p-4 max-h-full overflow-auto">
+              <div className="bg-boxBackgroundColor mb-8 rounded-lg p-4 max-h-full h-full overflow-auto">
               {children}
               </div>
               </div>

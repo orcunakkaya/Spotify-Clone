@@ -16,20 +16,6 @@
   }
 }
 
-/* body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
-
-/* body{
-  height: 100vh;
-} */
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -37,20 +23,19 @@
 }
 
 div::-webkit-scrollbar {
-  width: 12px;               /* width of the entire scrollbar */
+  width: 12px;
   z-index: 2;
   position: absolute;
 }
 div::-webkit-scrollbar-track {
-  background: transparent;      /* color of the tracking area */
+  background: transparent;
   background-clip: border-box;
   position: relative;
 }
 
 div::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.3);    /* color of the scroll thumb */
-      /* roundness of the scroll thumb */
-  border: none;  /* creates padding around scroll thumb */
+  background-color: rgba(255, 255, 255, 0.3);
+  border: none;
   background-clip: border-box;
   border-image-width: 1;
   min-height: 30px;
