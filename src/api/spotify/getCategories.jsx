@@ -1,7 +1,7 @@
 const getCategories = async (accessToken) => {
   
     try {
-      const response = await fetch('https://api.spotify.com/v1/browse/categories', {
+      const response = await fetch('https://api.spotify.com/v1/browse/categories?limit=50', {
         method: 'get',
         headers: {
           Authorization: `Bearer ${accessToken}`,
