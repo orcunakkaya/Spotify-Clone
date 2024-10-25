@@ -9,9 +9,9 @@ const getGenreList = async (accessToken, categoryId) => {
         cache: 'no-store'
       });
       const data = await response.json();
-      console.log(data)
+    //   console.log(data)
     //   return data.categories.items;
-
+      return data;
     } catch (error) {
         console.error('Error fetching genre categories:', error);
         throw error;

@@ -13,7 +13,9 @@ module.exports = {
       pageBackgroundColor: '#000',
       linkColor: '#b3b3b3',
       white: '#ffffff',
-      blue: '#5179a1'
+      blue: '#5179a1',
+      subdued: '#b3b3b3',
+      highlight: '#1f1f1f'
     },
     rotate: {
       '25': '25deg'

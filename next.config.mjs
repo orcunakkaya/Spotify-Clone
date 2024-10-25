@@ -11,11 +11,24 @@ const nextConfig = {
             protocol: 'https',
             hostname: '**scdn**',
           },
-        //   {
-        //     protocol: 'https',
-        //     hostname: '**charts-images.scdn.co**',
-        //   },
+          {
+            protocol: 'https',
+            hostname: '**',
+          },
         ],
+      },
+      async headers() {
+        return [
+          {
+            source: "/(.*)",
+            headers: [
+              {
+                key: "Content-Security-Policy",
+                value: "default-src 'self' data: 'unsafe-inline' 'unsafe-eval'; img-src *",
+              },
+            ],
+          },
+        ];
       },
 };
 
