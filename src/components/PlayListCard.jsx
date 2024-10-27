@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const PlayListCard = ({ item }) => {
   return (
-    <Link href={'/'} className='rounded-md p-3 flex flex-col gap-2 hover:bg-highlight'>
+    <Link href={`/playlist/${item.id}`} className='rounded-md p-3 flex flex-col gap-2 hover:bg-highlight'>
         <Image 
             src={item.images[0].url}
             alt={item.description}
