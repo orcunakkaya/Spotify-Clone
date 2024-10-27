@@ -13,7 +13,7 @@ const PlayListCard = ({ item }) => {
             priority
         />
         <div className='font-normal text-base'>{item.name}</div>
-        <div className='text-sm text-subdued'>{item.description}</div>
+        <div className='text-sm text-subdued overflow-hidden text-ellipsis whitespace-normal line-clamp-2'>{item.description}</div>
     </Link>
   )
 }
