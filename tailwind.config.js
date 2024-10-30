@@ -19,6 +19,11 @@ module.exports = {
     },
     rotate: {
       '25': '25deg'
+    },
+    gridTemplateColumns: {
+      'custom-layout': '16px 40px minmax(240px, 6fr) minmax(160px, 4fr) minmax(120px, 3fr) minmax(40px, 1fr)',
+      'custom-layout-md': '16px 40px minmax(240px, 6fr) minmax(160px, 4fr) minmax(40px, 1fr)',
+      'custom-layout-sm': '16px 40px minmax(160px, 6fr) minmax(40px, 1fr)'
     }
   },
   plugins: [],

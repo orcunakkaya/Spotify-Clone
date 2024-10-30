@@ -1,23 +1,39 @@
-import React from 'react'
-import Image from 'next/image'
+import React from "react";
+import Image from "next/image";
 
-const MusicCard = ({ music, order}) => {
+const MusicCard = ({ music, order }) => {
   return (
-    <div>
-        <span className='text-subdued text-base'>{order}</span>
-        <Image 
-            src={music.track.album.images[0].url}
-            alt={music.track.album.name}
-            width={64}
-            height={64}
-        />
-        <div>
-            <div>{music.track.name}</div>
-            <div>{music.track.album.artists.map((artist) => artist.name).join(', ')}</div>
+    <div className="text-subdued grid grid-cols-custom-layout px-4 gap-x-4 border border-transparent h-14 items-center max-2xl:grid-cols-custom-layout-md ">
+      <span className="text-base ">{order}</span>
+      <Image
+        src={music.track.album.images[0].url}
+        alt={music.track.album.name}
+        width={40}
+        height={40}
+        className=""
+      />
+      <div className="">
+        <div className="text-white text-base overflow-hidden text-ellipsis whitespace-normal">{music.track.name}</div>
+        <div className="text-subdued hover:text-white text-sm">
+          {music.track.album.artists.map((artist) => artist.name).join(", ")}
         </div>
-        <div>{music.track.album.name}</div>
+      </div>
+      <div className="text-sm overflow-hidden text-ellipsis whitespace-normal">{music.track.album.name}</div>
+      <div className="text-sm max-2xl:hidden">{music.track.album.release_date}</div>
+      <div className="flex flex-nowrap gap-x-4">
+        <div className="text-sm ">
+          {music.track.duration_ms}
+        </div>
+        <div>...</div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default MusicCard
+export default MusicCard;
+
+// grid-template-columns: 
+// 16px minmax(120px, var(--col1, 6fr)) minmax(120px, var(--col2, 4fr)) minmax(120px, var(--col3, 3fr)) minmax(120px, var(--col4, 1fr))
+
+// grid-template-columns: 
+// [index] var(--tracklist-index-column-width, 16px) [first] minmax(120px, var(--col1, 4fr)) [var1] minmax(120px, var(--col2, 2fr)) [last] minmax(120px, var(--col3, 1fr));
