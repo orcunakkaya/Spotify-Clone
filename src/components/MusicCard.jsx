@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Dots from "../../public/assets/Dots";
 
 const MusicCard = ({ music, order }) => {
   return (
@@ -13,18 +14,18 @@ const MusicCard = ({ music, order }) => {
         className=""
       />
       <div className="">
-        <div className="text-white text-base overflow-hidden text-ellipsis whitespace-normal">{music.track.name}</div>
-        <div className="text-subdued hover:text-white text-sm">
+        <div className="text-white text-base overflow-hidden text-ellipsis whitespace-normal line-clamp-1">{music.track.name}</div>
+        <div className="text-subdued hover:text-white text-sm overflow-hidden text-ellipsis whitespace-normal line-clamp-1">
           {music.track.album.artists.map((artist) => artist.name).join(", ")}
         </div>
       </div>
-      <div className="text-sm overflow-hidden text-ellipsis whitespace-normal">{music.track.album.name}</div>
+      <div className="text-sm overflow-hidden text-ellipsis whitespace-normal line-clamp-1">{music.track.album.name}</div>
       <div className="text-sm max-2xl:hidden">{music.track.album.release_date}</div>
-      <div className="flex flex-nowrap gap-x-4">
-        <div className="text-sm ">
+      <div className="flex flex-nowrap gap-x-4 justify-between">
+        <div className="text-sm text-ellipsis whitespace-normal line-clamp-1">
           {music.track.duration_ms}
         </div>
-        <div>...</div>
+        <button className="flex justify-center items-center"><Dots /></button>
       </div>
     </div>
   );
