@@ -1,10 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import Dots from "../../public/assets/Dots";
+import msToMinutesAndSeconds from '@/utils/time';
 
 const MusicCard = ({ music, order }) => {
   return (
-    <div className="text-subdued grid grid-cols-custom-layout px-4 gap-x-4 border border-transparent h-14 items-center max-2xl:grid-cols-custom-layout-md ">
+    <div className="text-subdued grid grid-cols-custom-layout px-4 gap-x-4 border border-transparent h-14 items-center max-2xl:grid-cols-custom-layout-md hover:bg-hoverBackgroundColor rounded">
       <span className="text-base ">{order}</span>
       <Image
         src={music.track.album.images[0].url}
@@ -21,9 +22,9 @@ const MusicCard = ({ music, order }) => {
       </div>
       <div className="text-sm overflow-hidden text-ellipsis whitespace-normal line-clamp-1">{music.track.album.name}</div>
       <div className="text-sm max-2xl:hidden">{music.track.album.release_date}</div>
-      <div className="flex flex-nowrap gap-x-4 justify-between">
+      <div className="flex flex-nowrap gap-x-2 justify-between">
         <div className="text-sm text-ellipsis whitespace-normal line-clamp-1">
-          {music.track.duration_ms}
+          {msToMinutesAndSeconds(music.track.duration_ms)}
         </div>
         <button className="flex justify-center items-center"><Dots /></button>
       </div>

@@ -15,14 +15,15 @@ module.exports = {
       white: '#ffffff',
       blue: '#5179a1',
       subdued: '#b3b3b3',
-      highlight: '#1f1f1f'
+      highlight: '#1f1f1f',
+      hoverBackgroundColor: '#ffffff1a'
     },
     rotate: {
       '25': '25deg'
     },
     gridTemplateColumns: {
-      'custom-layout': '16px 40px minmax(0px, 6fr) minmax(0px, 4fr) minmax(0px, 3fr) minmax(40px, 100px)',
-      'custom-layout-md': '16px 40px minmax(0px, 1fr) minmax(0px, 1fr) minmax(40px, 100px)',
+      'custom-layout': '16px 40px minmax(0px, 6fr) minmax(0px, 4fr) minmax(0px, 3fr) minmax(40px, 80px)',
+      'custom-layout-md': '16px 40px minmax(0px, 1fr) minmax(0px, 1fr) minmax(40px, 60px)',
       'custom-layout-sm': '16px 40px minmax(160px, 6fr) minmax(40px, 1fr)',
       // 'custom-base-layout': 'minmax(min-content, 400px) minmax(min-content, 1fr)'
       // 'custom-base-layout': 'auto 1fr',
