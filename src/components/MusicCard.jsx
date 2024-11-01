@@ -34,7 +34,7 @@ const MusicCard = ({ music, order }) => {
 
   return (
     <>
-      <div className="group text-subdued grid grid-cols-custom-layout px-4 gap-x-4 border border-transparent h-14 items-center max-2xl:grid-cols-custom-layout-md hover:bg-hoverBackgroundColor rounded">
+      <div className={`group text-subdued hover:text-white grid grid-cols-custom-layout px-4 gap-x-4 border border-transparent h-14 items-center max-2xl:grid-cols-custom-layout-md ${!isOpen && 'hover:bg-hoverBackgroundColor'} rounded ${isOpen && 'bg-tinted text-white'}`}>
         <span className="text-base group-hover:hidden">{order + 1}</span>
         <span className="text-white hidden group-hover:block">{<Play />}</span>
         <Image
@@ -44,27 +44,27 @@ const MusicCard = ({ music, order }) => {
           height={40}
           className=""
         />
-        <div className="">
+        <div>
           <div className="text-white text-base overflow-hidden text-ellipsis whitespace-normal line-clamp-1">
             {music.track.name}
           </div>
-          <div className="text-subdued hover:text-white text-sm overflow-hidden text-ellipsis whitespace-normal line-clamp-1">
+          <div className=" text-sm overflow-hidden text-ellipsis whitespace-normal line-clamp-1">
             {music.track.album.artists.map((artist) => artist.name).join(", ")}
           </div>
         </div>
         <div className="text-sm overflow-hidden text-ellipsis whitespace-normal line-clamp-1">
           {music.track.album.name}
         </div>
-        <div className="text-sm max-2xl:hidden">
+        <div className="text-sm max-2xl:hidden text-subdued">
           {music.track.album.release_date}
         </div>
         <div className="flex flex-nowrap gap-x-2 justify-between relative">
-          <div className="text-sm text-ellipsis whitespace-normal line-clamp-1">
+          <div className="text-sm text-ellipsis whitespace-normal line-clamp-1 text-subdued">
             {msToMinutesAndSeconds(music.track.duration_ms)}
           </div>
           <button
             type="button"
-            className="flex justify-center items-center"
+            className="flex justify-center items-center text-white"
             id="menu-button"
             onClick={toggleDropdown}
             aria-expanded={isOpen}
@@ -74,7 +74,7 @@ const MusicCard = ({ music, order }) => {
             <Dots />
           </button>
           {isOpen && (
-          <div className="absolute mt-2 right-0 bg-white border rounded shadow-md" ref={dropdownRef}>
+          <div className="absolute mt-8 right-0 bg-transparent border-none border rounded shadow-md z-10" ref={dropdownRef}>
             <Dropdown onSelect={handleSelect}  />
           </div>
         )}

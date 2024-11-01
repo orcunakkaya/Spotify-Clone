@@ -16,7 +16,9 @@ module.exports = {
       blue: '#5179a1',
       subdued: '#b3b3b3',
       highlight: '#1f1f1f',
-      hoverBackgroundColor: '#ffffff1a'
+      hoverBackgroundColor: '#ffffff1a',
+      tinted: '#ffffff4d',
+      decorativeSubdued: '#282828',
     },
     rotate: {
       '25': '25deg'
