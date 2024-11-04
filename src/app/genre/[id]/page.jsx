@@ -6,7 +6,6 @@ import PlayListCard from '@/components/PlayListCard';
 const Home = async ({ params }) => {
   const token = await getToken();
   const genre = await getGenreList(token, params.id);
-  
   return (
     <div className='text-white px-2'>
         <h1 className='text-8xl whitespace-nowrap font-extrabold pt-24'>{genre.message}</h1>

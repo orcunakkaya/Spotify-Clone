@@ -24,9 +24,9 @@ module.exports = {
       '25': '25deg'
     },
     gridTemplateColumns: {
-      'custom-layout': '16px 40px minmax(0px, 6fr) minmax(0px, 4fr) minmax(0px, 3fr) minmax(40px, 80px)',
+      'custom-layout': '16px 40px minmax(0px, 6fr) minmax(0px, 4fr) minmax(0px, 3fr) minmax(40px, 60px)',
       'custom-layout-md': '16px 40px minmax(0px, 1fr) minmax(0px, 1fr) minmax(40px, 60px)',
-      'custom-layout-sm': '16px 40px minmax(160px, 6fr) minmax(40px, 1fr)',
+      'custom-layout-sm': '16px 40px minmax(0px, 1fr) minmax(40px, 60px)',
       // 'custom-base-layout': 'minmax(min-content, 400px) minmax(min-content, 1fr)'
       // 'custom-base-layout': 'auto 1fr',
       'custom-base-layout': 'minmax(min-content, 350px) 1fr'

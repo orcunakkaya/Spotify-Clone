@@ -10,7 +10,6 @@ const Dropdown = dynamic(() => import("./Dropdown"), { ssr: false });
 const MusicCard = ({ music, order }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
-
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -34,7 +33,7 @@ const MusicCard = ({ music, order }) => {
 
   return (
     <>
-      <div className={`group text-subdued hover:text-white grid grid-cols-custom-layout px-4 gap-x-4 border border-transparent h-14 items-center max-2xl:grid-cols-custom-layout-md ${!isOpen && 'hover:bg-hoverBackgroundColor'} rounded ${isOpen && 'bg-tinted text-white'}`}>
+      <div className={`group text-subdued hover:text-white grid grid-cols-custom-layout px-4 gap-x-4 border border-transparent h-14 items-center max-2xl:grid-cols-custom-layout-md max-xl:grid-cols-custom-layout-sm ${!isOpen && 'hover:bg-hoverBackgroundColor'} rounded ${isOpen && 'bg-tinted text-white'}`}>
         <span className="text-base group-hover:hidden">{order + 1}</span>
         <span className="text-white hidden group-hover:block">{<Play />}</span>
         <Image
@@ -52,7 +51,7 @@ const MusicCard = ({ music, order }) => {
             {music.track.album.artists.map((artist) => artist.name).join(", ")}
           </div>
         </div>
-        <div className="text-sm overflow-hidden text-ellipsis whitespace-normal line-clamp-1">
+        <div className="text-sm max-xl:hidden overflow-hidden text-ellipsis whitespace-normal line-clamp-1">
           {music.track.album.name}
         </div>
         <div className="text-sm max-2xl:hidden text-subdued">
@@ -85,4 +84,3 @@ const MusicCard = ({ music, order }) => {
 };
 
 export default MusicCard;
-
