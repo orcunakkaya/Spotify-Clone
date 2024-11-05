@@ -1,11 +1,17 @@
 import React from "react";
 import Library from "../../public/assets/Library";
 import Plus from "../../public/assets/Plus";
-import Footer from "./Footer";
+import dynamic from "next/dynamic";
+const LibraryList = dynamic(() => import("./LibraryList"));
+// import LibraryList from "./LibraryList";
+
+// import Footer from "./Footer";
 
 const YourLibrary = () => {
+  
+
   return (
-    <div className="bg-boxBackgroundColor rounded-lg px-4 pt-3 pb-2 flex flex-col gap-y-2 h-full justify-between grow overflow-auto">
+    <div className="bg-boxBackgroundColor rounded-lg px-4 pt-3 pb-2 flex flex-col gap-y-2 h-full overflow-auto"> 
       <div className="flex justify-between items-center ">
         <button className="text-linkColor flex items-center gap-x-5 hover:text-white">
           <Library />
@@ -15,8 +21,9 @@ const YourLibrary = () => {
           <Plus />
         </button>
       </div>
-
-      <Footer />
+      <div className="mt-2">
+          <LibraryList />
+      </div>
     </div>
   );
 };
