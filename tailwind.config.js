@@ -29,7 +29,10 @@ module.exports = {
       'custom-layout-sm': '16px 40px minmax(0px, 1fr) minmax(40px, 60px)',
       // 'custom-base-layout': 'minmax(min-content, 400px) minmax(min-content, 1fr)'
       // 'custom-base-layout': 'auto 1fr',
-      'custom-base-layout': 'minmax(min-content, 350px) 1fr'
+      'custom-base-layout': 'minmax(min-content, 350px) 1fr',
+      
+      'navbar-layout': 'min-content auto'
+
     },
     width: {
       '128': '32rem'
