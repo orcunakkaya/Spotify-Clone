@@ -2,14 +2,14 @@ import React from "react";
 import Library from "../../public/assets/Library";
 import Plus from "../../public/assets/Plus";
 import dynamic from "next/dynamic";
+import prisma from "@/lib/db";
 const LibraryList = dynamic(() => import("./LibraryList"));
-// import LibraryList from "./LibraryList";
 
-// import Footer from "./Footer";
+
 
 const YourLibrary = () => {
-  
-
+  const playlist = prisma.playlist.findMany();
+  console.log(playlist);
   return (
     <div className="bg-boxBackgroundColor rounded-lg px-4 pt-3 pb-2 flex flex-col gap-y-2 h-full overflow-auto"> 
       <div className="flex justify-between items-center ">
