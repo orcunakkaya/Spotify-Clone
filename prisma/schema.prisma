@@ -1,5 +1,3 @@
-
-
 datasource db {
   url      = env("DATABASE_URL")
   provider = "postgresql"
@@ -13,14 +11,15 @@ model User {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   email     String   @unique
-  name      String?
+  name      String
 }
 
 model Playlist {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  title     String
-  songs     Json
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  title         String
+  songs         Json[]
+  playListImage String   @default("")
 }
 
 // npx prisma db push tabloları oluşturmak için
@@ -31,3 +30,4 @@ model Playlist {
 
 // npx prisma migrate dev --name init prisma migrate oluşturmak için
 
+// veri tipinde bir değişiklik yaparsak migrate etmemiz gerekiyor   npx prisma migrate dev

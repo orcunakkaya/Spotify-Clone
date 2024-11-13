@@ -1,17 +1,23 @@
 'use client';
 
-import React from "react";
+import React, { useEffect } from "react";
 import Library from "../../public/assets/Library";
 import Plus from "../../public/assets/Plus";
 import dynamic from "next/dynamic";
-import prisma from "@/lib/db";
 const LibraryList = dynamic(() => import("./LibraryList"));
-import { createPlaylist } from "@/actions/actions";
+import { createPlaylist, getAllPlaylists } from "@/actions/actions";
 
 const YourLibrary = () => {
-
+  
+  useEffect(() => {
+    getAllPlaylists().then((res) => {
+      console.log('YourLibrary', res);
+    }).catch((err) => {
+      console.error('YourLibrary', err);
+    });
+  }, [])
+  
   const addNewList = async () => {
-
     createPlaylist(
       {
         title: 'New Playlist',

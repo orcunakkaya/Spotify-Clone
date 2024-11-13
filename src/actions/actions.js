@@ -3,17 +3,26 @@
 import prisma from "@/lib/db";
 
 export const createPlaylist = async (req, res) => {
-    console.log('createPlaylist', req);
   try {
     const newPlaylist = await prisma.playlist.create({
       data: {
         title: 'New Playlist',
-        songs: []
+        songs: JSON.parse("[]"),
+        // playListImage: "https://via.placeholder.com/150",
       },
     });
     return newPlaylist;
   } catch (error) {
     console.error(error);
+    return error;
+  }
+}
+
+export const getAllPlaylists = async (req, res) => {
+  try {
+    const playlists = await prisma.playlist.findMany();
+    return playlists;
+  } catch (error) {
     return error;
   }
 }

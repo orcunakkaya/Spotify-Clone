@@ -6,7 +6,7 @@ const ArrowRight = () => {
       data-encore-id="icon"
       role="img"
       aria-hidden="true"
-      class="Svg-sc-ytk21e-0 dYnaPI klmTmoDHY2lTsLzlA2qX"
+      className="Svg-sc-ytk21e-0 dYnaPI klmTmoDHY2lTsLzlA2qX"
       viewBox="0 0 16 16"
       x="0px"
       y="0px"
