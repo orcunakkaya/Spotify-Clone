@@ -74,7 +74,7 @@ const MusicCard = ({ music, order }) => {
           </button>
           {isOpen && (
           <div className="absolute mt-8 right-0 bg-transparent border-none border rounded shadow-md z-10" ref={dropdownRef}>
-            <Dropdown onSelect={handleSelect}  />
+            <Dropdown onSelect={handleSelect} music={music.track} />
           </div>
         )}
         </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Library from "../../public/assets/Library";
 import Plus from "../../public/assets/Plus";
 import dynamic from "next/dynamic";
@@ -8,25 +8,27 @@ const LibraryList = dynamic(() => import("./LibraryList"));
 import { createPlaylist, getAllPlaylists } from "@/actions/actions";
 
 const YourLibrary = () => {
-  
+  const [playlists, setPlaylists] = useState([]);
+
   useEffect(() => {
-    getAllPlaylists().then((res) => {
-      console.log('YourLibrary', res);
-    }).catch((err) => {
-      console.error('YourLibrary', err);
-    });
+    getData();
   }, [])
-  
+
   const addNewList = async () => {
-    createPlaylist(
-      {
-        title: 'New Playlist',
-        songs: []
-      }
-    ).then((res) => {
-      console.log('addNewList', res);
+    createPlaylist({
+      title: `${playlists.length + 1}.My Playlist`
+    }).then((res) => {
+      getData();
     }).catch((err) => {
       console.error('addNewList', err);
+    });
+  }
+
+  const getData = () => {
+    getAllPlaylists().then((res) => {
+      setPlaylists(res);
+    }).catch((err) => {
+      console.error('YourLibrary', err);
     });
   }
 
@@ -42,7 +44,7 @@ const YourLibrary = () => {
         </button>
       </div>
       <div className="mt-2">
-          <LibraryList />
+          <LibraryList list={playlists} />
       </div>
     </div>
   );

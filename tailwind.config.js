@@ -19,6 +19,7 @@ module.exports = {
       hoverBackgroundColor: '#ffffff1a',
       tinted: '#ffffff4d',
       decorativeSubdued: '#282828',
+      lightDecorativeSubdued: '#7f7f7f',
     },
     rotate: {
       '25': '25deg'

@@ -6,9 +6,8 @@ export const createPlaylist = async (req, res) => {
   try {
     const newPlaylist = await prisma.playlist.create({
       data: {
-        title: 'New Playlist',
+        title: req.title,
         songs: JSON.parse("[]"),
-        // playListImage: "https://via.placeholder.com/150",
       },
     });
     return newPlaylist;
