@@ -5,7 +5,7 @@ import Share from "../../public/assets/Share";
 import MiniLogo from "../../public/assets/MiniLogo";
 import Plus from "../../public/assets/Plus";
 import ArrowRight from "../../public/assets/ArrowRight";
-import { getAllPlaylists } from "@/actions/actions";
+import { getAllPlaylists, addSongToPlaylist } from "@/actions/actions";
 
 const Dropdown = ({ onSelect, music }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +24,65 @@ const Dropdown = ({ onSelect, music }) => {
   }
 
   const adMusicToPlaylist = (playlist) => {
-    console.log(music)
+    
+    addSongToPlaylist({
+      id: playlist.id,
+      song: {
+          "track": {
+            "album": {
+              "images": [
+                {
+                  "url": music.track.album.images[0].url
+                }
+              ],
+              "name": music.track.album.name,
+              "artists": music.track.album.artists,
+              "release_date": music.track.album.release_date
+            },
+            "name": music.track.name,
+            "duration_ms": music.track.duration_ms,
+          }
+      }
+    })
+    // .then((res) => {
+    //   console.log(res);
+    // }).catch((err) => {
+    //   console.error('addNewList', err);
+    // });
+    /*
+src={music.track.album.images[0].url}
+alt={music.track.album.name}
+
+ {music.track.name} +
+{music.track.album.artists.map((artist) => artist.name).join(", ")} +
+{music.track.album.name} + 
+{music.track.album.release_date} + 
+{msToMinutesAndSeconds(music.track.duration_ms)} +
+*/
+
+//     {
+//       "music": {
+//         "track": {
+//           "album": {
+//             "images": [
+//               {
+//                 "url": "https://i.scdn"
+//               }
+//             ],
+//             "name": "Album Name",
+//             "artists": [
+//               {
+//                 "name": "Artist Name"
+//               }
+//             ],
+//             "release_date": "2021-10-01"
+//           },
+//           "name": "Track Name",
+//           "duration_ms": 1000,
+
+//     }
+//   }
+// }
   }
     
   // console.log(playlists);

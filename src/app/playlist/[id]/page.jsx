@@ -22,7 +22,7 @@ const Home = async ({ params }) => {
                 <MusicCard key={index} music={music} order={index} />
             ))
         }
-        <pre>{JSON.stringify(playList.tracks.items[1].track, null, 2)}</pre>
+        <pre>{JSON.stringify(playList.tracks.items[1], null, 2)}</pre>
     </div>
   )
 }

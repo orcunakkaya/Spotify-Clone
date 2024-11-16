@@ -21,7 +21,7 @@ const MusicCard = ({ music, order }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
+console.log(music)
   const toggleDropdown = () => {
     setIsOpen((prev) => !prev);
   };
@@ -74,7 +74,7 @@ const MusicCard = ({ music, order }) => {
           </button>
           {isOpen && (
           <div className="absolute mt-8 right-0 bg-transparent border-none border rounded shadow-md z-10" ref={dropdownRef}>
-            <Dropdown onSelect={handleSelect} music={music.track} />
+            <Dropdown onSelect={handleSelect} music={music} />
           </div>
         )}
         </div>

@@ -1,6 +1,7 @@
 'use server';
 
 import prisma from "@/lib/db";
+import { revalidatePath } from 'next/cache';
 
 export const createPlaylist = async (req, res) => {
   try {
@@ -26,6 +27,20 @@ export const getAllPlaylists = async (req, res) => {
   }
 }
 
+export const getPlaylist = async (req, res) => {
+  const { id } = req;
+  try {
+    const playlist = await prisma.playlist.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    return playlist;
+  } catch (error) {
+    return error;
+  }
+}
+
 export const editPlaylist = async (req, res) => {
   const { id, title } = req.body;
   try {
@@ -44,7 +59,7 @@ export const editPlaylist = async (req, res) => {
 }
 
 export const addSongToPlaylist = async (req, res) => {
-    const { id, song } = req.body;
+    const { id, song } = req;
     try {
         const updatedPlaylist = await prisma.playlist.update({
         where: {
@@ -56,9 +71,10 @@ export const addSongToPlaylist = async (req, res) => {
             },
         },
         });
-        res.status(200).json(updatedPlaylist);
+        revalidatePath(`/collection/${id}`);
+        return updatedPlaylist;
     } catch (error) {
-        res.status(500).json({ error: "Something went wrong" });
+        return error;
     }
     };
 
