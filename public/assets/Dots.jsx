@@ -1,6 +1,6 @@
 import React from "react";
 
-const Dots = () => {
+const Dots = ({ color='currentColor', width="16", height="16" }) => {
   return (
     <svg
       data-encore-id="icon"
@@ -10,9 +10,9 @@ const Dots = () => {
       className="Svg-sc-ytk21e-0 dYnaPI"
       x="0px"
       y="0px"
-      width="16"
-      height="16"
-      fill="currentColor"
+      width={width}
+      height={height}
+      fill={color}
     >
       <path d="M3 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm6.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM16 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path>
     </svg>

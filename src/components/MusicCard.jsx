@@ -3,8 +3,9 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Dots from "../../public/assets/Dots";
 import msToMinutesAndSeconds from "@/utils/time";
-import Play from "../../public/assets/Play";
 import dynamic from "next/dynamic";
+import Play from "../../public/assets/Play.jsx";
+
 const Dropdown = dynamic(() => import("./Dropdown"), { ssr: false });
 
 const MusicCard = ({ music, order }) => {
@@ -34,7 +35,10 @@ const MusicCard = ({ music, order }) => {
     <>
       <div className={`group text-subdued hover:text-white grid grid-cols-custom-layout px-4 gap-x-4 border border-transparent h-14 items-center max-2xl:grid-cols-custom-layout-md max-xl:grid-cols-custom-layout-sm ${!isOpen && 'hover:bg-hoverBackgroundColor'} rounded ${isOpen && 'bg-tinted text-white'}`}>
         <span className="text-base group-hover:hidden">{order + 1}</span>
-        <span className="text-white hidden group-hover:block">{<Play />}</span>
+        <span className="text-white hidden group-hover:block">{
+          <Play />
+    
+      }</span>
         <Image
           src={music.track.album.images[0].url}
           alt={music.track.album.name}

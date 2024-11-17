@@ -10,7 +10,7 @@ const LibraryList = ({ list }) => {
     const handleRouter = (route) => {
         router.push(`/collection/${route}`);
     }
-console.log('list', list)
+
   return (
     <div>
       <button onClick={() => handleRouter('liked-songs')} className={`block min-w-full h-16 p-2 border border-transparent ${!isOpen && 'hover:bg-hoverBackgroundColor'} rounded ${isOpen && 'bg-tinted text-white'}`}>
@@ -35,14 +35,14 @@ console.log('list', list)
       list.map((item, index) => (
         <button onClick={() => handleRouter(item.id)} key={index} className={`block min-w-full h-16 p-2 border border-transparent ${!isOpen && 'hover:bg-hoverBackgroundColor'} rounded ${isOpen && 'bg-tinted text-white'}`}>
           <div className='h-12 flex flex-nowrap gap-2'>
-            <div className='border-none rounded h-12 min-w-12 grid place-items-center bg-decorativeSubdued text-lightDecorativeSubdued'>
+            <div className='border-none rounded h-12 min-w-12 grid place-items-center bg-decorativeSubdued'>
                 <Image 
                     src='/assets/empty.svg'
                     alt={item.title}
                     width={24}
                     height={24}
                     priority
-                    className='rounded text-white'
+                    className='rounded'
                 />
             </div>
             <div className='grid gap-0.5 text-left'>

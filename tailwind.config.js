@@ -14,12 +14,15 @@ module.exports = {
       linkColor: '#b3b3b3',
       white: '#ffffff',
       blue: '#5179a1',
+      black: '#000000',
+      green: '#1ed760',
       subdued: '#b3b3b3',
       highlight: '#1f1f1f',
       hoverBackgroundColor: '#ffffff1a',
       tinted: '#ffffff4d',
       decorativeSubdued: '#282828',
       lightDecorativeSubdued: '#7f7f7f',
+      gradiantBack: '#00000080'
     },
     rotate: {
       '25': '25deg'
