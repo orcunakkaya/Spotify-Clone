@@ -20,6 +20,7 @@ module.exports = {
       highlight: '#1f1f1f',
       hoverBackgroundColor: '#ffffff1a',
       tinted: '#ffffff4d',
+      tintedBase: '#ffffff1a',
       decorativeSubdued: '#282828',
       lightDecorativeSubdued: '#7f7f7f',
       gradiantBack: '#00000080'

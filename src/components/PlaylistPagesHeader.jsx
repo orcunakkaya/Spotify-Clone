@@ -24,7 +24,7 @@ const PlaylistPagesHeader = ({ playlist }) => {
             </div>
             </div>
         </div>
-        <div className='bg-decorativeSubdued -mt-4 -ml-4 -mr-4 p-6 flex flex-nowrap gap-x-8'>
+        <div className='bg-gradient-to-b from-decorativeSubdued from-0% to-black -mt-4 -ml-4 -mr-4 p-6 flex flex-nowrap gap-x-8'>
             <PlayButton /><DotsButton />
         </div>
     </div>
