@@ -2,7 +2,6 @@ import { getPlaylist } from '@/actions/actions';
 import MusicCard from '@/components/MusicCard';
 import Time from '../../../../public/assets/Time';
 import PlaylistPagesHeader from '@/components/PlaylistPagesHeader';
-
 const Home = async ({ params }) => {
     const playList = await getPlaylist({id: params.id});
   

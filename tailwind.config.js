@@ -24,6 +24,7 @@ module.exports = {
       decorativeSubdued: '#282828',
       lightDecorativeSubdued: '#7f7f7f',
       gradiantBack: '#00000080',
+      opacityBacground: '#00000060',
     },
     boxShadow: {
       emptyBox: '0 4px 60px rgba(0,0,0,.5)'

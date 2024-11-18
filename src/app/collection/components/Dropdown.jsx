@@ -10,11 +10,11 @@ const Dropdown = ({ handleSelect }) => {
   return (
     <>
         <ul className="relative min-w-56 p-1 text-subdued whitespace-nowrap text-sm bg-decorativeSubdued border-none rounded">
-      <li onClick={() => handleSelect('edit') } className="w-full py-3 pl-3 pr-2 flex items-center gap-2 cursor-pointer hover:bg-hoverBackgroundColor">
+      <li onClick={() => handleSelect('edit')} className="w-full py-3 pl-3 pr-2 flex items-center gap-2 cursor-pointer hover:bg-hoverBackgroundColor">
         <Image src="/assets/edit.svg" alt="delete" width={16} height={16} />
         <span className="text-white">Düzenle</span>
       </li>
-      <li className="w-full py-3 pl-3 pr-2 flex items-center gap-2 cursor-pointer hover:bg-hoverBackgroundColor">
+      <li onClick={() => handleSelect('delete')} className="w-full py-3 pl-3 pr-2 flex items-center gap-2 cursor-pointer hover:bg-hoverBackgroundColor">
         <Image src="/assets/trash.svg" alt="delete" width={16} height={16} />
         <span className="text-white">Sil</span>
       </li>

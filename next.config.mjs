@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    experimental: {
+      serverActions: {
+        bodySizeLimit: '2mb',
+      },
+    },
     env: {
         SPOTIFY_CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
         SPOTIFY_CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET,
@@ -24,7 +29,7 @@ const nextConfig = {
             headers: [
               {
                 key: "Content-Security-Policy",
-                value: "default-src 'self' data: 'unsafe-inline' 'unsafe-eval'; img-src *",
+                value: "'self' data: https:; default-src 'self' data: 'unsafe-inline' 'unsafe-eval'; img-src *",
               },
             ],
           },

@@ -42,7 +42,7 @@ export const getPlaylist = async (req, res) => {
 }
 
 export const editPlaylist = async (req, res) => {
-  const { id, title } = req.body;
+  const { id, title, playListImage } = req;
   try {
     const updatedPlaylist = await prisma.playlist.update({
       where: {
@@ -50,11 +50,12 @@ export const editPlaylist = async (req, res) => {
       },
       data: {
         title: title,
+        playListImage: playListImage
       },
     });
-    res.status(200).json(updatedPlaylist);
+    return updatedPlaylist;
   } catch (error) {
-    res.status(500).json({ error: "Something went wrong" });
+    return error;
   }
 }
 
@@ -79,15 +80,15 @@ export const addSongToPlaylist = async (req, res) => {
     };
 
 export const deletePlaylist = async (req, res) => {
-    const { id } = req.body;
+    const { id } = req;
     try {
         await prisma.playlist.delete({
         where: {
             id: id,
         },
         });
-        res.status(204).end();
+        return true;
     } catch (error) {
-        res.status(500).json({ error: "Something went wrong" });
+        return error;
     }
     };
