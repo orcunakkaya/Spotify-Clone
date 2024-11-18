@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image';
 
-const Modal = ({ footer=<></> }) => {
+const Modal = ({ header=<></>, content=<></>, footer=<></> }) => {
   return (
     <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
   
@@ -15,17 +15,21 @@ const Modal = ({ footer=<></> }) => {
           <div class="sm:flex sm:items-start">
             
             <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-              <h3 class="text-base font-semibold text-gray-900" id="modal-title">Deactivate account</h3>
+              <h3 class="text-base font-semibold text-gray-900" id="modal-title">
+                    {header}
+              </h3>
               <div class="mt-2">
-                <p class="text-sm text-gray-500">Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone.</p>
+                <p class="text-sm text-gray-500">
+                    {content}
+                </p>
               </div>
             </div>
             <button className='hover:bg-tintedBase grid place-items-center rounded-full p-1.5'>
                 <Image 
                     src="/assets/close.svg"
                     alt="Close"
-                    width={32}
-                    height={32}
+                    width={16}
+                    height={16}
                 />
             </button>
           </div>

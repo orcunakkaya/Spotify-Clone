@@ -23,7 +23,10 @@ module.exports = {
       tintedBase: '#ffffff1a',
       decorativeSubdued: '#282828',
       lightDecorativeSubdued: '#7f7f7f',
-      gradiantBack: '#00000080'
+      gradiantBack: '#00000080',
+    },
+    boxShadow: {
+      emptyBox: '0 4px 60px rgba(0,0,0,.5)'
     },
     rotate: {
       '25': '25deg'
