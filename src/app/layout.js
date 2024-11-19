@@ -4,6 +4,8 @@ const inter = Inter({ subsets: ["latin"] });
 import Navbar from "@/components/Navbar";
 import YourLibrary from "@/components/YourLibrary";
 
+import { PlaylistProvider } from "@/context/PlaylistContext";
+
 export const metadata = {
   title: "Spotify Clone",
   description: "Listen to music!",
@@ -16,15 +18,17 @@ export default function RootLayout({ children }) {
         <div className="h-screen p-2 bg-pageBackgroundColor overflow-hidden">
        
             <Navbar />
-            <main className="grid grid-cols-custom-base-layout mt-2 min-h-[calc(100vh-72px)] max-h-[calc(100vh-72px)] h-[calc(100vh-72px)]">
-              <div className=" bg-gray-800 p-4 text-white max-h-full" >
-                <YourLibrary />
-              </div>
-              
-              <div className="bg-boxBackgroundColor m-4 mb-4 rounded-lg p-4 max-h-full overflow-hidden overflow-y-auto">
-              {children}
-              </div>
-            </main>
+            <PlaylistProvider>
+              <main className="grid grid-cols-custom-base-layout mt-2 min-h-[calc(100vh-72px)] max-h-[calc(100vh-72px)] h-[calc(100vh-72px)]">
+                <div className=" bg-gray-800 p-4 text-white max-h-full" >
+                  <YourLibrary />
+                </div>
+                
+                <div className="bg-boxBackgroundColor m-4 mb-4 rounded-lg p-4 max-h-full overflow-hidden overflow-y-auto">
+                {children}
+                </div>
+              </main>
+            </PlaylistProvider>
           </div>
       </body>
     </html> 

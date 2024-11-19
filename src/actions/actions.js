@@ -53,6 +53,7 @@ export const editPlaylist = async (req, res) => {
         playListImage: playListImage
       },
     });
+    revalidatePath(`/collection/${id}`);
     return updatedPlaylist;
   } catch (error) {
     return error;
