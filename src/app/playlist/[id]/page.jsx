@@ -1,6 +1,6 @@
 import React from 'react'
 import getToken from '@/api/auth/getToken';
-import getPlayList from '@/api/spotify/getPlayList';
+import { getPlayList } from '@/api/spotify/getPlayList';
 import MusicCard from '@/components/MusicCard';
 import Time from '../../../../public/assets/Time';
 import PlaylistPagesHeader from '@/components/PlaylistPagesHeader';

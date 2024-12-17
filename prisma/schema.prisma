@@ -26,7 +26,7 @@ model Playlist {
 
 // npx prisma generate prisma client oluşturmak için
 
-// npx prisma studio prisma studio açmak için
+// npx prisma studio açmak için
 
 // npx prisma migrate dev --name init prisma migrate oluşturmak için
 

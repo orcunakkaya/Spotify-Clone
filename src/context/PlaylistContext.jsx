@@ -1,11 +1,11 @@
 "use client"
 
 import React, { useState, useEffect, createContext, useContext } from 'react';
-import { createPlaylist, getAllPlaylists } from '@/actions/actions';
+import { getAllPlaylists } from '@/actions/actions';
 
 const PlaylistContext = createContext();
 
-export const usePlaylist = () => {
+export const usePlaylistContext = () => {
     return useContext(PlaylistContext);
     }
 
@@ -16,16 +16,6 @@ export const PlaylistProvider = ({ children }) => {
         getData();
     }, []);
 
-    const addNewList = async () => {
-        createPlaylist({
-            title: `${playlists.length + 1}.My Playlist`
-        }).then((res) => {
-            getData();
-        }).catch((err) => {
-            console.error('addNewList', err);
-        });
-    }
-
     const getData = () => {
         getAllPlaylists().then((res) => {
             setPlaylists(res);
@@ -35,7 +25,7 @@ export const PlaylistProvider = ({ children }) => {
     }
 
     return (
-        <PlaylistContext.Provider value={{ playlists, addNewList }}>
+        <PlaylistContext.Provider value={{ playlists, setPlaylists, getData }}>
             {children}
         </PlaylistContext.Provider>
     )

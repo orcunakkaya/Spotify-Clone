@@ -35,18 +35,28 @@ const LibraryList = ({ list }) => {
       list.map((item, index) => (
         <button onClick={() => handleRouter(item.id)} key={index} className={`block min-w-full h-16 p-2 border border-transparent ${!isOpen && 'hover:bg-hoverBackgroundColor'} rounded ${isOpen && 'bg-tinted text-white'}`}>
           <div className='h-12 flex flex-nowrap gap-2'>
-            <div className='border-none rounded h-12 min-w-12 grid place-items-center bg-decorativeSubdued'>
-                <Image 
+            <div className='border-none rounded h-12 w-[48px] grid place-items-center bg-decorativeSubdued'>
+                {/* <Image 
                     src='/assets/empty.svg'
                     alt={item.title}
                     width={24}
                     height={24}
                     priority
                     className='rounded'
+                /> */}
+                <Image 
+                    src={item.playListImage.length > 0 ? item.playListImage : '/assets/empty.svg'}
+                    alt={item.title}
+                    width={item.playListImage.length > 0 ? 48 : 24}
+                    height={item.playListImage.length > 0 ? 48 : 24}
+                    priority
+                    className='rounded'
+                    style={{objectFit: 'cover', objectPosition: 'center center'}}
                 />
+
             </div>
             <div className='grid gap-0.5 text-left'>
-                <span>{item.title}</span>
+                <span className='overflow-hidden text-ellipsis whitespace-normal line-clamp-1'>{item.title}</span>
                 <span className='text-subdued'>{item.songs.length} Şarkı</span>
             </div>
           </div>

@@ -1,5 +1,4 @@
 const getGenreList = async (accessToken, categoryId) => {
-  
     try {
       const response = await fetch(`https://api.spotify.com/v1/browse/categories/${categoryId}/playlists?limit=50`, {
         method: 'get',
@@ -9,8 +8,6 @@ const getGenreList = async (accessToken, categoryId) => {
         cache: 'no-store'
       });
       const data = await response.json();
-    //   console.log(data)
-    //   return data.categories.items;
       return data;
     } catch (error) {
         console.error('Error fetching genre categories:', error);

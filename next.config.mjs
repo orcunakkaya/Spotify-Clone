@@ -29,12 +29,20 @@ const nextConfig = {
             headers: [
               {
                 key: "Content-Security-Policy",
-                value: "'self' data: https:; default-src 'self' data: 'unsafe-inline' 'unsafe-eval'; img-src *",
+                value: `
+                  default-src 'self';
+                  script-src 'self' 'unsafe-inline' 'unsafe-eval';
+                  style-src 'self' 'unsafe-inline';
+                  img-src 'self' data: https:;
+                  font-src 'self' data:;
+                  connect-src 'self';
+                  frame-src 'self';
+                `.replace(/\s{2,}/g, " ").trim(), // Fazla boşlukları kaldırır
               },
             ],
           },
         ];
-      },
+      }
 };
 
 export default nextConfig;

@@ -5,14 +5,11 @@ import Library from "../../public/assets/Library";
 import Plus from "../../public/assets/Plus";
 import dynamic from "next/dynamic";
 const LibraryList = dynamic(() => import("./LibraryList"));
-import { createPlaylist, getAllPlaylists } from "@/actions/actions";
+import { createPlaylist } from "@/actions/actions";
+import { usePlaylistContext } from "@/context/PlaylistContext";
 
 const YourLibrary = () => {
-  const [playlists, setPlaylists] = useState([]);
-
-  useEffect(() => {
-    getData();
-  }, [])
+  const { playlists, getData } = usePlaylistContext();
 
   const addNewList = async () => {
     createPlaylist({
@@ -21,14 +18,6 @@ const YourLibrary = () => {
       getData();
     }).catch((err) => {
       console.error('addNewList', err);
-    });
-  }
-
-  const getData = () => {
-    getAllPlaylists().then((res) => {
-      setPlaylists(res);
-    }).catch((err) => {
-      console.error('YourLibrary', err);
     });
   }
 

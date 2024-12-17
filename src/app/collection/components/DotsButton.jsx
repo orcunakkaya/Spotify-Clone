@@ -7,9 +7,12 @@ import Modal from "@/components/Modal";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { editPlaylist, deletePlaylist } from "@/actions/actions";
+import { usePlaylistContext } from "@/context/PlaylistContext";
 
 const DotsButton = ({ playlist }) => {
   const router = useRouter();
+  const { setPlaylists } = usePlaylistContext();
+
   const [isOpen, setIsOpen] = useState(false);
   const [imageDropdownOpen, setImageDropdownOpen] = useState(false);
 
@@ -98,7 +101,19 @@ const DotsButton = ({ playlist }) => {
             description: description,
             playListImage: image ?? '',
         }
-    );
+    )
+    .then(res => {
+        if(res){
+            setPlaylists((prev) => prev.map((item) => {
+                if(item.id === playlist.id){
+                    return {
+                        ...res
+                    }
+                }
+                return item;
+            }))
+        }
+    });
     setShowEditModal(false);
   }
 
@@ -106,7 +121,7 @@ const DotsButton = ({ playlist }) => {
     deletePlaylist({ id: playlist.id })
         .then(res => {
             if(res === true){
-                // redirect to home page
+                setPlaylists((prev) => prev.filter((item) => item.id !== playlist.id));
                 router.push('/');
             }
         })

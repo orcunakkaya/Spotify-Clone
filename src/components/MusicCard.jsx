@@ -28,7 +28,6 @@ const MusicCard = ({ music, order }) => {
   };
 
   const handleSelect = (option) => {
-    console.log("Selected:", option);
     setIsOpen(false);
   };
   return (
@@ -77,11 +76,12 @@ const MusicCard = ({ music, order }) => {
           </button>
           {isOpen && (
           <div className="absolute mt-8 right-0 bg-transparent border-none border rounded shadow-md z-10" ref={dropdownRef}>
-            <Dropdown onSelect={handleSelect} music={music} />
+            <Dropdown onSelect={handleSelect} music={music} setIsMainOpen={setIsOpen} />
           </div>
         )}
         </div>
       </div>
+      <pre>{JSON.stringify(music, null, 2)}</pre>
     </>
   );
 };

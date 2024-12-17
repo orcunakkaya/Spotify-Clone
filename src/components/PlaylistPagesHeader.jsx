@@ -16,11 +16,14 @@ const PlaylistPagesHeader = ({ playlist }) => {
                     height={playlist.playListImage.length > 0 ? 230 : 64}
                     priority
                     className='rounded'
+                    // objectFit='cover'
+                    // objectPosition='center center'
+                    style={{objectFit: 'cover', objectPosition: 'center center'}}
                 />
             </div>
             <div className='ml-6 flex flex-col self-end gap-2'>
                 <span className='text-sm'>Çalma listesi</span>
-                <span className='font-extrabold text-8xl'>{playlist.title}</span>
+                <span className='font-extrabold text-8xl overflow-hidden text-ellipsis whitespace-normal line-clamp-1 leading-tight'>{playlist.title}</span>
                 <span className='font-bold text-sm'>Orçun Berkay Akkaya • {playlist.songs.length} şarkı</span>
             </div>
             </div>
