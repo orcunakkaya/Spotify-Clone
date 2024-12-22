@@ -29,9 +29,9 @@ const PlayListCard = ({ item, hidden }) => {
           />
         )}
       </div>
-      <div className="font-normal text-base text-white">{item.name}</div>
+      <div className="font-normal text-base text-white overflow-hidden text-ellipsis whitespace-normal line-clamp-1">{item.name}</div>
       <div
-        className={`text-sm text-linkColor overflow-hidden text-ellipsis whitespace-normal line-clamp-2 ${
+        className={`text-sm text-linkColor overflow-hidden text-ellipsis whitespace-normal line-clamp-1 ${
           hidden && "hidden"
         }`}
       >

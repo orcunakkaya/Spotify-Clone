@@ -81,7 +81,6 @@ const MusicCard = ({ music, order }) => {
         )}
         </div>
       </div>
-      <pre>{JSON.stringify(music, null, 2)}</pre>
     </>
   );
 };
