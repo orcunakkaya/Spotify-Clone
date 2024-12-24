@@ -39,29 +39,29 @@ const MusicCard = ({ music, order }) => {
     
       }</span>
         <Image
-          src={music.track.album.images[0].url}
-          alt={music.track.album.name}
+          src={music.image}
+          alt={music.name}
           width={40}
           height={40}
           className=""
         />
         <div>
           <div className="text-white text-base overflow-hidden text-ellipsis whitespace-normal line-clamp-1">
-            {music.track.name}
+            {music.name}
           </div>
           <div className=" text-sm overflow-hidden text-ellipsis whitespace-normal line-clamp-1">
-            {music.track.album.artists.map((artist) => artist.name).join(", ")}
+            {music.artistName}
           </div>
         </div>
         <div className="text-sm max-xl:hidden overflow-hidden text-ellipsis whitespace-normal line-clamp-1">
-          {music.track.album.name}
+          {music.albumName}
         </div>
         <div className="text-sm max-2xl:hidden text-subdued">
-          {music.track.album.release_date}
+          {music.release_date}
         </div>
         <div className="flex flex-nowrap gap-x-2 justify-between relative">
           <div className="text-sm text-ellipsis whitespace-normal line-clamp-1 text-subdued">
-            {msToMinutesAndSeconds(music.track.duration_ms)}
+            {msToMinutesAndSeconds(music.duration_ms)}
           </div>
           <button
             type="button"

@@ -54,7 +54,14 @@ const Dropdown = ({ onSelect, music, setIsMainOpen }) => {
     setIsMainOpen(false);
   }
 
-
+  const deleteSong = () => {
+    removeSongFromPlaylist({
+      id: music.id
+    }).then(res => {
+      setPlaylists(prev => prev.filter(i => i.id !== music.id));
+    })
+    setIsMainOpen(false);
+  }
 
 
   return (

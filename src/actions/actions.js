@@ -80,6 +80,26 @@ export const addSongToPlaylist = async (req, res) => {
     }
     };
 
+export const removeSongFromPlaylist = async (req, res) => {
+    const { id, song } = req;
+    try {
+        const updatedPlaylist = await prisma.playlist.update({
+        where: {
+            id: id,
+        },
+        data: {
+            songs: {
+            set: song,
+            },
+        },
+        });
+        revalidatePath(`/collection/${id}`);
+        return updatedPlaylist;
+    } catch (error) {
+        return error;
+    }
+    }
+
 export const deletePlaylist = async (req, res) => {
     const { id } = req;
     try {

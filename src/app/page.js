@@ -4,7 +4,7 @@ import CategoryCard from "@/components/CategoryCard.jsx";
 import { getMyPlayList } from "@/api/spotify/getPlayList.jsx";
 import { getAllPlaylists } from "@/actions/actions";
 import PlayListCard from "@/components/PlayListCard.jsx";
-import { getAllAlbums } from "@/api/spotify/getAlbums.jsx";
+import { getAllAlbums, getShows } from "@/api/spotify/getAlbums.jsx";
 
 export default async function Home() {
   const token = await getToken();
@@ -12,9 +12,10 @@ export default async function Home() {
   // const myPlayList = await getMyPlayList(token);
   const playlists = await getAllPlaylists();
   const albumData = await getAllAlbums(token);
+  const shows = await getShows(token);
   
   return (
-    <div>
+    <div className="text-white">
       <div className="grid grid-cols-[repeat(auto-fill,_196px)] grid-rows-[repeat(auto-fill,_minmax(0,_1fr))]">
       {
         playlists.map((p, index) => (
@@ -23,6 +24,7 @@ export default async function Home() {
       }
       </div>
 
+      <div>Popüler Albümler</div>
       <div className="grid grid-cols-[repeat(auto-fill,_196px)] grid-rows-[repeat(auto-fill,_minmax(0,_1fr))]">
       {
         albumData?.albums?.items?.map((a, index) => (
@@ -36,7 +38,8 @@ export default async function Home() {
           <CategoryCard category={category} key={index} />
         ))}
         {/* <pre className="text-white">{JSON.stringify(playlists, null, 2)}</pre> */}
-        <pre className="text-white">{JSON.stringify(albumData, null, 2)}</pre>
+        {/* <pre className="text-white">{JSON.stringify(albumData, null, 2)}</pre> */}
+        <pre className="text-white">{JSON.stringify(shows, null, 2)}</pre>
       </div>
     </div>
   );
