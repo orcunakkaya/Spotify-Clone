@@ -2,6 +2,7 @@
 
 import prisma from "@/lib/db";
 import { revalidatePath } from 'next/cache';
+import { nanoid } from 'nanoid';
 
 export const createPlaylist = async (req, res) => {
   try {
@@ -63,13 +64,14 @@ export const editPlaylist = async (req, res) => {
 export const addSongToPlaylist = async (req, res) => {
     const { id, song } = req;
     try {
+        const uniqueId = nanoid();
         const updatedPlaylist = await prisma.playlist.update({
         where: {
             id: id,
         },
         data: {
             songs: {
-            push: song,
+              push: {...song, id: uniqueId},
             },
         },
         });

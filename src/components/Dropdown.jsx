@@ -16,7 +16,7 @@ const Dropdown = ({ onSelect, music, setIsMainOpen }) => {
   const { setPlaylists } = usePlaylistContext();
   const [isOpen, setIsOpen] = useState(false);
   const [playlist, setPlaylist] = useState([]);
-
+  
   useEffect(() => {
     getData();
   }, [])
@@ -29,25 +29,10 @@ const Dropdown = ({ onSelect, music, setIsMainOpen }) => {
     });
   }
 
-  const adMusicToPlaylist = (playlist) => {
+  const adMusicToPlaylist = (playListId) => {
     addSongToPlaylist({
-      id: playlist.id,
-      song: {
-          "track": {
-            "album": {
-              "images": [
-                {
-                  "url": music.track.album.images[0].url
-                }
-              ],
-              "name": music.track.album.name,
-              "artists": music.track.album.artists,
-              "release_date": music.track.album.release_date
-            },
-            "name": music.track.name,
-            "duration_ms": music.track.duration_ms,
-          }
-      }
+      id: playListId,
+      song: music
     }).then(res => {
       setPlaylists(prev => prev.map(i => i.id === playlist.id ? res : i));
     })
@@ -70,7 +55,7 @@ const Dropdown = ({ onSelect, music, setIsMainOpen }) => {
     {isOpen && <ul className="absolute min-w-56 p-1 top-8 right-px bg-decorativeSubdued border-none rounded -translate-x-60 translate-y-1" >
       {
         playlist.map((pl, index) => (
-          <li key={index} className="w-full py-3 pl-3 pr-2 flex items-center gap-2 cursor-pointer hover:bg-hoverBackgroundColor overflow-hidden text-ellipsis whitespace-normal line-clamp-1" onClick={() => adMusicToPlaylist(pl)}><span className="text-white">{pl.title}</span></li>
+          <li key={index} className="w-full py-3 pl-3 pr-2 flex items-center gap-2 cursor-pointer hover:bg-hoverBackgroundColor overflow-hidden text-ellipsis whitespace-normal line-clamp-1" onClick={() => adMusicToPlaylist(pl.id)}><span className="text-white">{pl.title}</span></li>
         ))
       }
       </ul>}

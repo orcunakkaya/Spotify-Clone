@@ -15,7 +15,8 @@
     "node": "^18.17.0",
     "npx": "^10.2.2",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
     "eslint": "^8",
