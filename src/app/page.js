@@ -15,9 +15,12 @@ export default async function Home() {
   const theWeekendAlbumResponse = await getSearchLists(token, 'artist:The%20Weekend', 'album', );
   const theWeekendAlbums = theWeekendAlbumResponse.albums.items.filter(i => i !== null);
 
+  const rockResponse = await getSearchLists(token, 'Rock', 'playlist');
+  const rock = rockResponse.playlists.items.filter(i => i !== null);
+
   const popResponse = await getSearchLists(token, 'Pop', 'playlist');
   const pop = popResponse.playlists.items.filter(i => i !== null);
-  
+
   return (
     <div className="text-white">
       <div className="grid grid-cols-[repeat(auto-fill,_196px)] grid-rows-[repeat(auto-fill,_minmax(0,_1fr))]">
@@ -28,7 +31,7 @@ export default async function Home() {
       }
       </div>
 
-      <div>The Weekend</div>
+      <div className="text-2xl text-white font-bold">The Weekend</div>
       <div className="grid grid-cols-[repeat(auto-fill,_196px)] grid-rows-[repeat(auto-fill,_minmax(0,_1fr)]">
         {
           theWeekendAlbums.map((a, index) => (
@@ -37,7 +40,7 @@ export default async function Home() {
         }
       </div>
 
-      <div>Popüler Albümler</div>
+      <div className="text-2xl text-white font-bold">Popüler Albümler</div>
       <div className="grid grid-cols-[repeat(auto-fill,_196px)] grid-rows-[repeat(auto-fill,_minmax(0,_1fr))]">
       {
         albumData?.albums?.items?.map((a, index) => (
@@ -46,7 +49,16 @@ export default async function Home() {
       }
       </div>
 
-      <div>Pop</div>
+      <div className="text-2xl text-white font-bold">Rock</div>
+      <div className="grid grid-cols-[repeat(auto-fill,_196px)] grid-rows-[repeat(auto-fill,_minmax(0,_1fr))]">
+      {
+        rock?.map((p, index) => (
+          <PlayListCard item={{ path: `/playlist/${p.id}`, image: p?.images[0]?.url ?? '', hidden: true, name: p.name }} key={index} />
+        ))
+      }
+      </div>
+
+      <div className="text-2xl text-white font-bold">Pop</div>
       <div className="grid grid-cols-[repeat(auto-fill,_196px)] grid-rows-[repeat(auto-fill,_minmax(0,_1fr))]">
       {
         pop?.map((p, index) => (
@@ -59,9 +71,6 @@ export default async function Home() {
         {categories.map((category, index) => (
           <CategoryCard category={category} key={index} />
         ))}
-        {/* <pre className="text-white">{JSON.stringify(playlists, null, 2)}</pre> */}
-        {/* <pre className="text-white">{JSON.stringify(albumData, null, 2)}</pre> */}
-        <pre className="text-white">{JSON.stringify(pop, null, 2)}</pre>
       </div>
     </div>
   );
