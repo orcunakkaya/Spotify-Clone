@@ -32,9 +32,9 @@ export const getAlbum = async (accessToken, albumId) => {
     }
   }
 
-  export const getShows = async (accessToken, albumId) => {
+  export const getSearchLists = async (accessToken, query, type) => {
     try {
-      const response = await fetch(`https://api.spotify.com/v1/search?q=Popüler Albümler&type=album`, {
+      const response = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=${type}&limit=20`, {
         method: 'get',
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -50,3 +50,7 @@ export const getAlbum = async (accessToken, albumId) => {
   }
 
   // https://api.spotify.com/v1/search?q=2024 in Music&type=playlist bu şekilde category nin playlistlerini çekebilirim
+
+ // https://api.spotify.com/v1/search?q=Pop&type=playlist&limit=20
+
+ // https://api.spotify.com/v1/search?q=Popüler Albümler&type=album
