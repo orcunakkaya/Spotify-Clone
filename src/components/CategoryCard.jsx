@@ -5,7 +5,7 @@ import getRandromColor from "@/utils/Color.jsx";
 const CategoryCard = ({ category, index }) => {
   return (
     <Link
-      href={`/genre/${category.id}`}
+      href={`/genre/${category.name}`}
       className="p-3 w-full h-48 rounded-lg relative overflow-hidden"
       style={{ backgroundColor: getRandromColor() }}
     >
