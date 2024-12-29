@@ -5,6 +5,7 @@ import { getMyPlayList } from "@/api/spotify/getPlayList.jsx";
 import { getAllPlaylists } from "@/actions/actions";
 import PlayListCard from "@/components/PlayListCard.jsx";
 import { getAllAlbums, getSearchLists } from "@/api/spotify/getAlbums.jsx";
+import Slider from "@/components/Slider.jsx";
 
 export default async function Home() {
   const token = await getToken();
@@ -23,49 +24,50 @@ export default async function Home() {
 
   return (
     <div className="text-white">
-      <div className="grid grid-cols-[repeat(auto-fill,_196px)] grid-rows-[repeat(auto-fill,_minmax(0,_1fr))]">
+      <Slider>
       {
         playlists.map((p, index) => (
           <PlayListCard item={{ path: `/collection/${p.id}`, image: p.playListImage, hidden: true, name: p.title }} key={index} />
         ))
       }
-      </div>
+      </Slider>
 
       <div className="text-2xl text-white font-bold">The Weekend</div>
-      <div className="grid grid-cols-[repeat(auto-fill,_196px)] grid-rows-[repeat(auto-fill,_minmax(0,_1fr)]">
-        {
-          theWeekendAlbums.map((a, index) => (
-            <PlayListCard item={{ path: `/album/${a.id}`, image: a?.images[0]?.url ?? '', hidden: true, description: a.artists.map(i => i.name).join(', '), name: a.name }} key={index} />
-          ))
-        }
-      </div>
-
+      <Slider>
+          {
+            theWeekendAlbums.map((a, index) => (
+              
+                <PlayListCard className="w-[196px]" item={{ path: `/album/${a.id}`, image: a?.images[0]?.url ?? '', hidden: true, description: a.artists.map(i => i.name).join(', '), name: a.name }} key={index} />
+              
+            ))
+          }
+      </Slider>
       <div className="text-2xl text-white font-bold">Popüler Albümler</div>
-      <div className="grid grid-cols-[repeat(auto-fill,_196px)] grid-rows-[repeat(auto-fill,_minmax(0,_1fr))]">
+      <Slider>
       {
         albumData?.albums?.items?.map((a, index) => (
           <PlayListCard item={{ path: `/album/${a.id}`, image: a?.images[0]?.url ?? '', hidden: true, description: a.artists.map(i => i.name).join(', '), name: a.name }} key={index} />
         ))
       }
-      </div>
+      </Slider>
 
       <div className="text-2xl text-white font-bold">Rock</div>
-      <div className="grid grid-cols-[repeat(auto-fill,_196px)] grid-rows-[repeat(auto-fill,_minmax(0,_1fr))]">
+      <Slider>
       {
         rock?.map((p, index) => (
           <PlayListCard item={{ path: `/playlist/${p.id}`, image: p?.images[0]?.url ?? '', hidden: true, name: p.name }} key={index} />
         ))
       }
-      </div>
+      </Slider>
 
       <div className="text-2xl text-white font-bold">Pop</div>
-      <div className="grid grid-cols-[repeat(auto-fill,_196px)] grid-rows-[repeat(auto-fill,_minmax(0,_1fr))]">
+      <Slider>
       {
         pop?.map((p, index) => (
           <PlayListCard item={{ path: `/playlist/${p.id}`, image: p?.images[0]?.url ?? '', hidden: true, name: p.name }} key={index} />
         ))
       }
-      </div>
+      </Slider>
       
       <div className="grid gap-6" style={{gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))'}}>
         {categories.map((category, index) => (
@@ -75,3 +77,5 @@ export default async function Home() {
     </div>
   );
 }
+
+// grid grid-cols-[repeat(auto-fill,_196px)] grid-rows-[repeat(auto-fill,_minmax(0,_1fr))]

@@ -8,12 +8,12 @@ const Home = async ({ params }) => {
   const token = await getToken();
   // const genre = await getGenreList(token, params.id);
 
-  const genreResponse = await getSearchLists(token, params.id, 'playlist');
+  const genreResponse = await getSearchLists(token, decodeURIComponent(params.id), 'playlist');
   const genre = genreResponse.playlists.items.filter(i => i !== null);
   
   return (
     <div className='text-white px-2'>
-        <h1 className='text-8xl whitespace-nowrap font-extrabold pt-24 p-10 bg-gradient-to-b from-lightDecorativeSubdued from-0% to-decorativeSubdued -m-8 mb-4 to-100%'>{params.id}</h1>
+        <h1 className='text-8xl whitespace-nowrap font-extrabold pt-24 p-10 bg-gradient-to-b from-lightDecorativeSubdued from-0% to-decorativeSubdued -m-8 mb-4 to-100%'>{decodeURIComponent(params.id)}</h1>
         
         <div className='grid grid-cols-[repeat(auto-fill,_minmax(180px,_1fr))] grid-rows-[repeat(auto-fill,_minmax(0,_1fr))]'>
         {
