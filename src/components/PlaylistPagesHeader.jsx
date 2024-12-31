@@ -16,8 +16,9 @@ const PlaylistPagesHeader = ({ playlist, type="my playlist", name="Orçun Berkay
                     <Image
                         src={playlist.playListImage}
                         alt={playlist.title}
-                        layout="fill"
-                        objectFit="cover"
+                        sizes='230px'
+                        fill
+                        style={{objectFit: 'cover', objectPosition: 'center center'}}
                         priority
                         className="rounded grid"
                     />

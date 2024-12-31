@@ -45,3 +45,14 @@ div::-webkit-scrollbar-thumb {
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
 }
+
+@media screen and (max-width: 1024px) {
+  div::-webkit-scrollbar {
+    width: 6px;
+  }
+  div::-webkit-scrollbar-thumb{
+    min-height: 20px;
+    height: 100px;
+    border-radius: 0;
+  }
+}

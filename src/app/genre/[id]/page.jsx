@@ -13,7 +13,10 @@ const Home = async ({ params }) => {
   
   return (
     <div className='text-white px-2'>
-        <h1 className='text-8xl whitespace-nowrap font-extrabold pt-24 p-10 bg-gradient-to-b from-lightDecorativeSubdued from-0% to-decorativeSubdued -m-8 mb-4 to-100%'>{decodeURIComponent(params.id)}</h1>
+      <div className='pt-24 p-10 bg-gradient-to-b from-lightDecorativeSubdued from-0% to-decorativeSubdued -m-8 mb-4 to-100%'>
+      <h1 className='text-8xl font-extrabold overflow-hidden line-clamp-1 text-ellipsis whitespace-normal leading-tight '>{decodeURIComponent(params.id)}</h1>
+      </div>
+        
         
         <div className='grid grid-cols-[repeat(auto-fill,_minmax(180px,_1fr))] grid-rows-[repeat(auto-fill,_minmax(0,_1fr))]'>
         {

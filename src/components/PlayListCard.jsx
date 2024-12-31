@@ -14,8 +14,9 @@ const PlayListCard = ({ item, hidden }) => {
           <Image
             src={item.image.length > 0 ? item.image : "/assets/empty.svg"}
             alt={item.name}
-            layout="fill"
-            objectFit="cover"
+            sizes="171px"
+            fill
+            style={{objectFit: 'cover', objectPosition: 'center center'}}
             priority
             className="rounded"
           />

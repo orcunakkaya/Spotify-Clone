@@ -30,7 +30,7 @@ const MusicCard = ({ music, order }) => {
   const handleSelect = (option) => {
     setIsOpen(false);
   };
-  console.log(music)
+
   return (
     <>
       <div className={`group text-subdued hover:text-white grid grid-cols-custom-layout px-4 gap-x-4 border border-transparent h-14 items-center max-2xl:grid-cols-custom-layout-md max-xl:grid-cols-custom-layout-sm ${!isOpen && 'hover:bg-hoverBackgroundColor'} rounded ${isOpen && 'bg-tinted text-white'}`}>

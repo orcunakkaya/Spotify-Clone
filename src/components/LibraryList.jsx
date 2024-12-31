@@ -35,24 +35,28 @@ const LibraryList = ({ list }) => {
       list.map((item, index) => (
         <button onClick={() => handleRouter(item.id)} key={index} className={`block min-w-full h-16 p-2 border border-transparent ${!isOpen && 'hover:bg-hoverBackgroundColor'} rounded ${isOpen && 'bg-tinted text-white'}`}>
           <div className='h-12 flex flex-nowrap gap-2'>
-            <div className='border-none rounded h-12 w-[48px] grid place-items-center bg-decorativeSubdued'>
-                {/* <Image 
-                    src='/assets/empty.svg'
-                    alt={item.title}
-                    width={24}
-                    height={24}
-                    priority
-                    className='rounded'
-                /> */}
-                <Image 
-                    src={item.playListImage.length > 0 ? item.playListImage : '/assets/empty.svg'}
-                    alt={item.title}
-                    width={item.playListImage.length > 0 ? 48 : 24}
-                    height={item.playListImage.length > 0 ? 48 : 24}
-                    priority
-                    className='rounded'
-                    style={{objectFit: 'cover', objectPosition: 'center center'}}
-                />
+            <div className='border-none rounded h-12 w-[48px] grid place-items-center bg-decorativeSubdued relative'>
+
+                {item.playListImage.length > 0 ? 
+                (<Image
+                src={item.playListImage.length > 0 ? item.playListImage : '/assets/empty.svg'}
+                alt={item.title}
+                fill
+                style={{objectFit: 'cover', objectPosition: 'center center'}}
+                priority
+                className="rounded"
+              />
+            ) : (
+              <Image
+                src={item.playListImage.length > 0 ? item.playListImage : '/assets/empty.svg'}
+                alt={item.title}
+                width={24}
+                height={24}
+                priority
+                className="rounded"
+              />
+              )}
+                
 
             </div>
             <div className='grid gap-0.5 text-left'>

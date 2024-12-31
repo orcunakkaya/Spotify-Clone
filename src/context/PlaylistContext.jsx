@@ -11,6 +11,7 @@ export const usePlaylistContext = () => {
 
 export const PlaylistProvider = ({ children }) => {
     const [playlists, setPlaylists] = useState([]);
+    const [playingSong, setPlayingSong] = useState('test');
 
     useEffect(() => {
         getData();
@@ -25,7 +26,7 @@ export const PlaylistProvider = ({ children }) => {
     }
 
     return (
-        <PlaylistContext.Provider value={{ playlists, setPlaylists, getData }}>
+        <PlaylistContext.Provider value={{ playlists, setPlaylists, getData, playingSong }}>
             {children}
         </PlaylistContext.Provider>
     )
