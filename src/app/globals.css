@@ -56,3 +56,83 @@ div::-webkit-scrollbar-thumb {
     border-radius: 0;
   }
 }
+
+.slider-input {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 5px;
+  background: linear-gradient(
+    to right,
+    rgba(var(--foreground-rgb), 0.1),
+    rgba(var(--foreground-rgb), 0.1)
+  );
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+
+/* Input range track (arka plan çubuğu) */
+input[type="range"].range-track-green {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+input[type="range"].range-track-green::-webkit-slider-runnable-track {
+  height: 4px;
+  background: #535353; /* Gri arka plan */
+  border-radius: 2px;
+}
+
+input[type="range"].range-track-green::-moz-range-track {
+  height: 4px;
+  background: #535353; /* Gri arka plan */
+  border-radius: 2px;
+}
+
+/* Input range progress (ilerleme çubuğu) */
+input[type="range"].range-track-green::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #1db954 0%, #1db954 calc((100% * var(--value)) / var(--max)), #535353 calc((100% * var(--value)) / var(--max)), #535353 100%);
+}
+
+input[type="range"].range-track-green::-moz-range-progress {
+  background: #1db954; /* Yeşil ilerleme çubuğu */
+  height: 4px;
+  border-radius: 2px;
+}
+
+/* Input range thumb (kaydırma düğmesi) */
+input[type="range"].range-thumb-transparent::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #fff; /* Beyaz thumb */
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  transform: translateY(-35%); /* Thumb'ı dikey olarak ortala */
+}
+
+input[type="range"].range-thumb-transparent:hover::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+input[type="range"].range-thumb-transparent::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: #fff; /* Beyaz thumb */
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  transform: translateY(-35%);
+}
+
+input[type="range"].range-thumb-transparent:hover::-moz-range-thumb {
+  opacity: 1;
+}

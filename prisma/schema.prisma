@@ -31,3 +31,13 @@ model Playlist {
 // npx prisma migrate dev --name init prisma migrate oluşturmak için
 
 // veri tipinde bir değişiklik yaparsak migrate etmemiz gerekiyor   npx prisma migrate dev
+
+
+
+
+    // "prisma": "prisma",  
+    // "prisma:generate": "prisma generate --no-engine",  Prisma Client'ı oluşturur
+    // "prisma:migrate": "prisma migrate dev --name init",  Yeni migration (şema değişiklikleri) oluşturur.
+    // "prisma:push": "prisma db push",   Veritabanına mevcut şemayı push eder.
+    // "prisma:studio": "prisma studio",  Prisma Studio'yu açar.
+    // "prisma:seed": "ts-node prisma/seed.ts"  Seed verilerini ekler

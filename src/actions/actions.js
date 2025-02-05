@@ -82,25 +82,34 @@ export const addSongToPlaylist = async (req, res) => {
     }
     };
 
-export const removeSongFromPlaylist = async (req, res) => {
-    const { id, song } = req;
-    try {
-        const updatedPlaylist = await prisma.playlist.update({
-        where: {
-            id: id,
-        },
-        data: {
-            songs: {
-            set: song,
-            },
-        },
-        });
-        revalidatePath(`/collection/${id}`);
-        return updatedPlaylist;
-    } catch (error) {
-        return error;
-    }
-    }
+    export const removeSongFromPlaylist = async (req, res) => {
+      const { id, songId } = req;
+      try {
+          // Önce playlisti getir
+          const playlist = await prisma.playlist.findUnique({
+              where: { id },
+              select: { songs: true }, // Sadece `songs` dizisini al
+          });
+  
+          if (!playlist) {
+              return res.status(404).json({ error: "Playlist not found" });
+          }
+  
+          // Şarkıyı listeden çıkar
+          const updatedSongs = playlist.songs.filter(song => song.id !== songId);
+  
+          // Yeni şarkı listesini kaydet
+          const updatedPlaylist = await prisma.playlist.update({
+              where: { id },
+              data: { songs: updatedSongs },
+          });
+  
+          revalidatePath(`/collection/${id}`);
+          return JSON.parse(JSON.stringify(updatedPlaylist)); // JSON'a çevirerek dön
+      } catch (error) {
+          return res.status(500).json({ error: error.message });
+      }
+  };
 
 export const deletePlaylist = async (req, res) => {
     const { id } = req;
