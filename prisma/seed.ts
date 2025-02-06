@@ -1,4 +1,5 @@
-import prisma from '@/lib/db'; // Prisma Client'ı içe aktar
+// import prisma from '@/lib/db'; // Prisma Client'ı içe aktar
+import prisma from '../src/lib/db'; // Prisma Client'ı içe aktar
 
 async function main() {
   const existingPlaylist = await prisma.playlist.findFirst({
@@ -11,6 +12,7 @@ async function main() {
         title: 'Liked Songs',
         playListImage: '/assets/liked-songs.png',
         songs: [],
+        defaultList: true,
       },
     });
     console.log('🎵 "Liked Songs" playlisti başarıyla oluşturuldu!');

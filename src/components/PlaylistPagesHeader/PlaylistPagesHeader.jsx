@@ -2,7 +2,6 @@ import React from 'react'
 import Image from 'next/image';
 import DotsButton from '@/app/collection/components/DotsButton';
 import dynamic from 'next/dynamic'
-// import PlayButtonComponent from './PlayButtonComponent';
 const PlayButtonComponent = dynamic(() => import('./PlayButtonComponent'), { ssr: false })
 
 const PlaylistPagesHeader = ({ playlist, type="my playlist", name="Orçun Berkay Akkaya" }) => {
@@ -34,14 +33,14 @@ const PlaylistPagesHeader = ({ playlist, type="my playlist", name="Orçun Berkay
                     )}
                 </div>
                 <div className='flex flex-col self-end gap-2 ml-6'>
-                    <span className='text-sm'>{type === 'my playlist' ? <>Çalma listesi</> : <>{type}</>}</span>
+                    <span className='text-sm'>{type === 'my playlist' ? <>Playlist</> : <>{type}</>}</span>
                     <span className='overflow-hidden font-extrabold leading-tight whitespace-normal text-8xl max-xl:text-5xl text-ellipsis line-clamp-1'>{playlist.title}</span>
-                    <span className='text-sm font-bold'>{type === 'my playlist' ? <>Orçun Berkay Akkaya</> : <>{name}</>} • {playlist.playListCount} şarkı</span>
+                    <span className='text-sm font-bold'>{type === 'my playlist' ? <>Orçun Berkay Akkaya</> : <>{name}</>} • {playlist.playListCount} songs</span>
                 </div>
             </div>
         </div>
         <div className='bg-gradient-to-b from-decorativeSubdued from-0% to-black -mt-4 -ml-4 -mr-4 p-6 flex flex-nowrap gap-x-8'>
-            {playlist && <PlayButtonComponent uris={playlist?.uris} /> } {playlist.hiddenOptions ? null : <DotsButton playlist={playlist} />}
+            {playlist && <PlayButtonComponent uris={playlist?.uris} /> } {playlist.defaultList === true ? null : playlist.hiddenOptions ? null : <DotsButton playlist={playlist} />}
         </div>
     </div>
   )

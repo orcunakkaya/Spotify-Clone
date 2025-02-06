@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import RandomPlay from "../../public/assets/music-player/RandomPlay";
 import ArrowLeft from "../../public/assets/music-player/ArrowLeft";
 import ArrowRight from "../../public/assets/music-player/ArrowRight";
-import ArrowPlay from "../../public/assets/ArrowRight";
 import Replay from "../../public/assets/music-player/Replay";
 import Voice from "../../public/assets/music-player/Voice";
 import Image from "next/image";
@@ -21,21 +20,18 @@ const Player = () => {
     allTracks,
     playSong,
   } = usePlayerContext();
-  const { player, setPlayer, deviceId, auth } = useAuthContext();
-  const [progress, setProgress] = useState(0); // Çalan süre
+  const { player, deviceId, auth } = useAuthContext();
 
-  // const duration = 240; // Şarkının toplam süresi (örnek: 240 saniye)
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
   const [volume, setVolume] = useState(0.5);
 
-  // Kullanıcı çubuğu sürüklediğinde zamanı güncellemek için
   const handleSeek = (event) => {
     const newTime = event.target.value;
     setCurrentTime(newTime);
     if (player) {
-      player.seek(newTime * 1000); // Spotify player'ını kullanarak zamanı güncelle
+      player.seek(newTime * 1000);
     }
   };
 
@@ -54,7 +50,7 @@ const Player = () => {
   const handleVolumeChange = (e) => {
     setVolume(e.target.value);
     if (player) {
-      player.setVolume(e.target.value); // Spotify player'ında sesi ayarla
+      player.setVolume(e.target.value);
     }
   };
 
@@ -68,7 +64,7 @@ const Player = () => {
             return prevTime + 1;
           } else {
             clearInterval(interval);
-            setIsPlaying(false); // Şarkı bitince çalmayı durdur
+            setIsPlaying(false);
             return duration;
           }
         });
@@ -86,7 +82,6 @@ const Player = () => {
         "player_state_changed",
         ({ position, duration, paused, track_window: { current_track } }) => {
           setCurrentTrack(current_track);
-          setProgress(position);
           setCurrentTime(position / 1000);
           setDuration(duration / 1000);
           if (position === 0 && paused) {
@@ -100,7 +95,7 @@ const Player = () => {
 
   useEffect(() => {
     if (player) {
-      player.setVolume(volume); // Ses seviyesi ayarını her değiştirildiğinde uygula
+      player.setVolume(volume);
     }
   }, [volume, player]);
 
@@ -149,10 +144,10 @@ const Player = () => {
               )}
             </div>
             <div className="grid">
-              <span className="text-ellipsis line-clamp-1">
+              <span className="text-ellipsis line-clamp-1 whitespace-nowrap">
                 {currentTrack ? currentTrack.name : ""}
               </span>
-              <span className="text-xs text-subdued text-ellipsis line-clamp-1">
+              <span className="text-xs whitespace-nowrap text-subdued text-ellipsis line-clamp-1">
                 {currentTrack
                   ? currentTrack.artists.map((i) => i.name).join(", ")
                   : ""}
@@ -258,10 +253,10 @@ const Player = () => {
               )}
             </div>
             <div className="grid">
-              <span className="text-xs text-ellipsis line-clamp-1">
+              <span className="text-xs text-ellipsis line-clamp-1 whitespace-nowrap">
                 {currentTrack ? currentTrack.name : ""}
               </span>
-              <span className="text-xs text-subdued text-ellipsis line-clamp-1">
+              <span className="text-xs text-subdued text-ellipsis line-clamp-1 whitespace-nowrap">
                 {currentTrack
                   ? currentTrack.artists.map((i) => i.name).join(", ")
                   : ""}

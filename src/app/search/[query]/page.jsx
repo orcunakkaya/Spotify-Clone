@@ -4,7 +4,7 @@ import BackArrow from "../../../../public/assets/BackArrow";
 import Image from "next/image";
 const Home = async ({ params }) => {
 
-  const res = await fetch("http://localhost:3000/api/auth/get-token", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/get-token`, {
     method: "POST",
     next: { revalidate: 1800 },
   }); 
@@ -12,7 +12,7 @@ const Home = async ({ params }) => {
   const token = data.access_token;
 
   const queryResponse = await fetch(
-    `http://localhost:3000/api/spotify/search?query=${params.query}&type=playlist`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/spotify/search?query=${params.query}&type=playlist`,
     {
       method: 'GET',
       headers: {
@@ -22,6 +22,10 @@ const Home = async ({ params }) => {
   );
   const query = await queryResponse.json();
   const queryFiltered = query.playlists.items.filter(i => i !== null);
+
+  if(!res.ok || !queryResponse.ok) {
+    throw new Error(`Hata: ${res.status} - ${res.statusText}`);
+  }
 
   return (
     <div className="p-2 text-white">

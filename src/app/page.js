@@ -1,31 +1,20 @@
-import CategoryCard from "@/components/CategoryCard.jsx";
 import { getAllPlaylists } from "@/actions/actions";
 import PlayListCard from "@/components/PlayListCard.jsx";
 import Slider from "@/components/Slider.jsx";
 
+//http://localhost:3000
 export default async function Home() {
-  const res = await fetch("http://localhost:3000/api/auth/get-token", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/get-token`, {
     method: "POST",
     next: { revalidate: 1800 },
   });
   const data = await res.json();
   const token = data.access_token;
 
-  const categoriesResponse = await fetch(
-    "http://localhost:3000/api/spotify/categories",
-    {
-      method: "GET",
-      headers: {
-        Authorization: `${token}`,
-      },
-    }
-  );
-  const categories = await categoriesResponse.json();
-
   const playlists = await getAllPlaylists();
 
   const albumResponse = await fetch(
-    "http://localhost:3000/api/spotify/albums",
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/spotify/albums`,
     {
       headers: {
         Authorization: `${token}`,
@@ -35,7 +24,7 @@ export default async function Home() {
   const albumData = await albumResponse.json();
 
   const theWeekendAlbumResponse = await fetch(
-    `http://localhost:3000/api/spotify/search?query=artist:The%20Weekend&type=album`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/spotify/search?query=artist:The%20Weekend&type=album`,
     {
       method: "GET",
       headers: {
@@ -46,7 +35,7 @@ export default async function Home() {
   const theWeekendAlbums = await theWeekendAlbumResponse.json();
 
   const rockResponse = await fetch(
-    `http://localhost:3000/api/spotify/search?query=Rock&type=playlist`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/spotify/search?query=Rock&type=playlist`,
     {
       method: "GET",
       headers: {
@@ -57,7 +46,7 @@ export default async function Home() {
   const rock = await rockResponse.json();
 
   const popResponse = await fetch(
-    `http://localhost:3000/api/spotify/search?query=Pop&type=playlist`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/spotify/search?query=Pop&type=playlist`,
     {
       method: "GET",
       headers: {
@@ -67,10 +56,14 @@ export default async function Home() {
   );
   const pop = await popResponse.json();
 
+  if(!res.ok || !albumResponse.ok || !theWeekendAlbumResponse.ok || !rockResponse.ok || !popResponse.ok) {
+    throw new Error(`Hata: ${res.status} - ${res.statusText}`);
+  }
+
   return (
     <div className="text-white">
       <Slider>
-        {playlists.map((p, index) => (
+        {playlists?.map((p, index) => (
           <PlayListCard
             item={{
               path: `/collection/${p.id}`,
@@ -150,12 +143,6 @@ export default async function Home() {
             />
           ))}
       </Slider>
-
-      <div className="grid gap-6 grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))]">
-        {categories.map((category, index) => (
-          <CategoryCard category={category} key={index} />
-        ))}
-      </div>
     </div>
   );
 }

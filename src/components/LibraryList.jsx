@@ -1,96 +1,110 @@
-'use client'
-import React, { useState } from 'react'
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+"use client";
+import React, { useState } from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import LibraryListLoading from "./LibraryListLoading";
+import { usePlaylistContext } from "@/context/PlaylistContext";
 
 const LibraryList = ({ list }) => {
-    const router = useRouter();
-    const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
 
-    const handleRouter = (route) => {
-        router.push(`/collection/${route}`);
-    }
+  const { loading } = usePlaylistContext();
 
+  const handleRouter = (route) => {
+    router.push(`/collection/${route}`);
+  };
+
+  const likedSongs = list.find((item) => item.defaultList === true);
+
+  if(loading) {
+    return Array.from({ length: 5 }).map((_, index) => <LibraryListLoading key={index} />)
+  }
+  
   return (
     <div>
-      <button onClick={() => handleRouter('liked-songs')} className={`block min-w-full h-16 p-2 border border-transparent ${!isOpen && 'hover:bg-hoverBackgroundColor'} rounded ${isOpen && 'bg-tinted text-white'}`}>
-          <div className='h-12 flex flex-nowrap gap-2'>
-            <div className='border-none rounded h-12 min-w-12 grid place-items-center'>
-                <Image 
-                    src='/assets/liked-songs.png'
-                    alt='liked song'
-                    width={48}
-                    height={48}
-                    priority
-                    className='rounded'
-                />
-            </div>
-            <div className='grid gap-0.5 text-left'>
-                <span>Beğenilen Şarkılar</span>
-                <span className='text-subdued'>0 Şarkı</span>
-            </div>
-          </div>
-    </button>
-    {
-      list.map((item, index) => (
-        <button onClick={() => handleRouter(item.id)} key={index} className={`block min-w-full h-16 p-2 border border-transparent ${!isOpen && 'hover:bg-hoverBackgroundColor'} rounded ${isOpen && 'bg-tinted text-white'}`}>
-          <div className='h-12 flex flex-nowrap gap-2'>
-            <div className='border-none rounded h-12 w-[48px] grid place-items-center bg-decorativeSubdued relative'>
-
-                {item.playListImage.length > 0 ? 
-                (<Image
-                src={item.playListImage.length > 0 ? item.playListImage : '/assets/empty.svg'}
-                alt={item.title}
-                fill
-                style={{objectFit: 'cover', objectPosition: 'center center'}}
-                priority
-                className="rounded"
-              />
-            ) : (
+      {likedSongs && (
+        <button
+          onClick={() => handleRouter(likedSongs.id)}
+          className={`block min-w-full h-16 p-2 border border-transparent ${
+            !isOpen && "hover:bg-hoverBackgroundColor"
+          } rounded ${isOpen && "bg-tinted text-white"}`}
+        >
+          <div className="flex h-12 gap-2 flex-nowrap">
+            <div className="border-none rounded h-12 w-[48px] grid place-items-center bg-decorativeSubdued relative">
               <Image
-                src={item.playListImage.length > 0 ? item.playListImage : '/assets/empty.svg'}
-                alt={item.title}
-                width={24}
-                height={24}
+                src={likedSongs.playListImage}
+                alt={likedSongs.title}
+                sizes="48px"
+                fill
+                style={{ objectFit: "cover", objectPosition: "center center" }}
                 priority
                 className="rounded"
               />
-              )}
-                
-
             </div>
-            <div className='grid gap-0.5 text-left'>
-                <span className='overflow-hidden text-ellipsis whitespace-normal line-clamp-1'>{item.title}</span>
-                <span className='text-subdued'>{item.songs.length} Şarkı</span>
+            <div className="grid gap-0.5 text-left">
+              <span>Liked Songs</span>
+              <span className="text-subdued">
+                {likedSongs.songs.length} songs
+              </span>
             </div>
           </div>
         </button>
-      ))
-    }
-    </div>
-    
-  )
-}
-
-export default LibraryList
-
-/*
-<div className={`h-16 p-2 border border-transparent ${!isOpen && 'hover:bg-hoverBackgroundColor'} rounded ${isOpen && 'bg-tinted text-white'}`}>
-          <div className='h-12 flex flex-nowrap gap-2'>
-            <div className='border-none rounded h-12 min-w-12 grid place-items-center' style={{backgroundColor: '(#5018F0, #282828)'}}>
-                <Image 
-                    src='/assets/liked-songs.png'
-                    alt='liked song'
-                    width={48}
-                    height={48}
+      )}
+      {list
+        .filter((i) => i?.defaultList !== true)
+        .map((item, index) => (
+          <button
+            onClick={() => handleRouter(item.id)}
+            key={index}
+            className={`block min-w-full h-16 p-2 border border-transparent ${
+              !isOpen && "hover:bg-hoverBackgroundColor"
+            } rounded ${isOpen && "bg-tinted text-white"}`}
+          >
+            <div className="flex h-12 gap-2 flex-nowrap">
+              <div className="border-none rounded h-12 w-[48px] grid place-items-center bg-decorativeSubdued relative">
+                {item.playListImage.length > 0 ? (
+                  <Image
+                    src={
+                      item.playListImage.length > 0
+                        ? item.playListImage
+                        : "/assets/empty.svg"
+                    }
+                    alt={item.title}
+                    fill
+                    style={{
+                      objectFit: "cover",
+                      objectPosition: "center center",
+                    }}
                     priority
-                    className='rounded'
-                />
+                    className="rounded"
+                  />
+                ) : (
+                  <Image
+                    src={
+                      item.playListImage.length > 0
+                        ? item.playListImage
+                        : "/assets/empty.svg"
+                    }
+                    alt={item.title}
+                    width={24}
+                    height={24}
+                    priority
+                    className="rounded"
+                  />
+                )}
+              </div>
+              <div className="grid gap-0.5 text-left">
+                <span className="overflow-hidden whitespace-normal text-ellipsis line-clamp-1">
+                  {item.title}
+                </span>
+                <span className="text-subdued">{item.songs.length} songs</span>
+              </div>
             </div>
-            <div className='grid gap-0.5'>
-                    <span>Beğenilen Şarkılar</span>
-                    <span>0 Şarkı</span>
-            </div>
-          </div>
+          </button>
+        ))}
     </div>
-*/
+  );
+};
+
+export default LibraryList;

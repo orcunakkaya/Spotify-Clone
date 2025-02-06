@@ -1,8 +1,8 @@
-'use server';
+"use server";
 
 import prisma from "@/lib/db";
-import { revalidatePath } from 'next/cache';
-import { nanoid } from 'nanoid';
+import { revalidatePath } from "next/cache";
+import { nanoid } from "nanoid";
 
 export const createPlaylist = async (req, res) => {
   try {
@@ -17,7 +17,7 @@ export const createPlaylist = async (req, res) => {
     console.error(error);
     return error;
   }
-}
+};
 
 export const getAllPlaylists = async (req, res) => {
   try {
@@ -26,7 +26,7 @@ export const getAllPlaylists = async (req, res) => {
   } catch (error) {
     return error;
   }
-}
+};
 
 export const getPlaylist = async (req, res) => {
   const { id } = req;
@@ -40,7 +40,7 @@ export const getPlaylist = async (req, res) => {
   } catch (error) {
     return error;
   }
-}
+};
 
 export const editPlaylist = async (req, res) => {
   const { id, title, playListImage } = req;
@@ -51,7 +51,7 @@ export const editPlaylist = async (req, res) => {
       },
       data: {
         title: title,
-        playListImage: playListImage
+        playListImage: playListImage,
       },
     });
     revalidatePath(`/collection/${id}`);
@@ -59,68 +59,90 @@ export const editPlaylist = async (req, res) => {
   } catch (error) {
     return error;
   }
-}
+};
 
 export const addSongToPlaylist = async (req, res) => {
-    const { id, song } = req;
-    try {
-        const uniqueId = nanoid();
-        const updatedPlaylist = await prisma.playlist.update({
-        where: {
-            id: id,
+  const { id, song } = req;
+  try {
+    const uniqueId = nanoid();
+    const updatedPlaylist = await prisma.playlist.update({
+      where: {
+        id: id,
+      },
+      data: {
+        songs: {
+          push: { ...song, id: uniqueId },
         },
-        data: {
-            songs: {
-              push: {...song, id: uniqueId},
-            },
-        },
-        });
-        revalidatePath(`/collection/${id}`);
-        return updatedPlaylist;
-    } catch (error) {
-        return error;
-    }
-    };
+      },
+    });
+    revalidatePath(`/collection/${id}`);
+    return updatedPlaylist;
+  } catch (error) {
+    return error;
+  }
+};
 
-    export const removeSongFromPlaylist = async (req, res) => {
-      const { id, songId } = req;
-      try {
-          // Önce playlisti getir
-          const playlist = await prisma.playlist.findUnique({
-              where: { id },
-              select: { songs: true }, // Sadece `songs` dizisini al
-          });
-  
-          if (!playlist) {
-              return res.status(404).json({ error: "Playlist not found" });
-          }
-  
-          // Şarkıyı listeden çıkar
-          const updatedSongs = playlist.songs.filter(song => song.id !== songId);
-  
-          // Yeni şarkı listesini kaydet
-          const updatedPlaylist = await prisma.playlist.update({
-              where: { id },
-              data: { songs: updatedSongs },
-          });
-  
-          revalidatePath(`/collection/${id}`);
-          return JSON.parse(JSON.stringify(updatedPlaylist)); // JSON'a çevirerek dön
-      } catch (error) {
-          return res.status(500).json({ error: error.message });
-      }
-  };
+export const addToSongToLikedSongs = async (req, res) => {
+  const { song } = req;
+  try {
+    const uniqueId = nanoid();
+    const playlist = await prisma.playlist.findFirst({
+      where: { defaultList: true },
+    });
+
+    const updatedPlaylist = await prisma.playlist.update({
+      where: { id: playlist.id },
+      data: {
+        songs: {
+          push: { ...song, id: uniqueId },
+        },
+      },
+    });
+    revalidatePath(`/collection/${playlist.id}`);
+    return updatedPlaylist;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const removeSongFromPlaylist = async (req, res) => {
+  const { id, songId } = req;
+  try {
+    const playlist = await prisma.playlist.findUnique({
+      where: { id },
+      select: { songs: true },
+    });
+
+    if (!playlist) {
+      return res.status(404).json({ error: "Playlist not found" });
+    }
+
+    const updatedSongs = playlist.songs.filter((song) => song.id !== songId);
+
+    const updatedPlaylist = await prisma.playlist.update({
+      where: { id },
+      data: { songs: updatedSongs },
+    });
+
+    revalidatePath(`/collection/${id}`);
+    return JSON.parse(JSON.stringify(updatedPlaylist)); // JSON'a çevirerek dön
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
 
 export const deletePlaylist = async (req, res) => {
-    const { id } = req;
-    try {
-        await prisma.playlist.delete({
-        where: {
-            id: id,
-        },
-        });
-        return true;
-    } catch (error) {
-        return error;
-    }
-    };
+  const { id } = req;
+  try {
+    await prisma.playlist.delete({
+      where: {
+        id: id,
+      },
+    });
+    revalidatePath(`/`);
+    revalidatePath(`/collection/${id}`);
+    return true;
+  } catch (error) {
+    return error;
+  }
+};

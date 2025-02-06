@@ -20,6 +20,7 @@ model Playlist {
   title         String
   songs         Json[]
   playListImage String   @default("")
+  defaultList   Boolean  @default(false)
 }
 
 // npx prisma db push tabloları oluşturmak için

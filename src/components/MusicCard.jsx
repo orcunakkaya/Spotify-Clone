@@ -45,19 +45,20 @@ const MusicCard = ({ music, order }) => {
 
   return (
     <>
-      <div className={`group text-subdued hover:text-white grid grid-cols-custom-layout px-4 gap-x-4 border border-transparent h-14 items-center max-2xl:grid-cols-custom-layout-md max-xl:grid-cols-custom-layout-sm ${!isOpen && 'hover:bg-hoverBackgroundColor'} rounded ${isOpen && 'bg-tinted text-white'}`}>
+      <div
+        className={`group text-subdued hover:text-white grid grid-cols-custom-layout px-4 gap-x-4 border border-transparent h-14 items-center max-2xl:grid-cols-custom-layout-md max-xl:grid-cols-custom-layout-sm ${
+          !isOpen && "hover:bg-hoverBackgroundColor"
+        } rounded ${isOpen && "bg-tinted text-white"}`}
+      >
         <span className="text-base group-hover:hidden">{order + 1}</span>
-        <span className="hidden text-white group-hover:block">{
-          <button onClick={() => handleSongClick(music.uri)}><Play /></button>
-    
-      }</span>
-        <Image
-          src={music.image}
-          alt={music.name}
-          width={40}
-          height={40}
-          className=""
-        />
+        <span className="hidden text-white group-hover:block">
+          {
+            <button onClick={() => handleSongClick(music.uri)}>
+              <Play />
+            </button>
+          }
+        </span>
+        <Image src={music.image} alt={music.name} width={40} height={40} />
         <div>
           <div className="overflow-hidden text-base text-white whitespace-normal text-ellipsis line-clamp-1">
             {music.name}
@@ -83,15 +84,21 @@ const MusicCard = ({ music, order }) => {
             onClick={toggleDropdown}
             aria-expanded={isOpen}
             aria-haspopup="true"
-            
           >
             <Dots />
           </button>
           {isOpen && (
-          <div className="absolute right-0 z-10 mt-8 bg-transparent border border-none rounded shadow-md" ref={dropdownRef}>
-            <Dropdown onSelect={handleSelect} music={music} setIsMainOpen={setIsOpen} />
-          </div>
-        )}
+            <div
+              className="absolute right-0 z-10 mt-8 bg-transparent border border-none rounded shadow-md"
+              ref={dropdownRef}
+            >
+              <Dropdown
+                onSelect={handleSelect}
+                music={music}
+                setIsMainOpen={setIsOpen}
+              />
+            </div>
+          )}
         </div>
       </div>
     </>

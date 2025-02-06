@@ -16,15 +16,17 @@ const Home = async ({ params }) => {
                 playListImage: playList?.playListImage ?? '',
                 playListCount: playList?.songs.length ?? 0,
                 hiddenOptions: false,
-                uris: playList?.songs.map((music) => music.uri)
+                uris: playList?.songs.map((music) => music.uri),
+                id: playList?.id ?? '',
+                defaultList: playList?.defaultList ?? false
             }} 
             />
         <div className='grid items-center h-8 px-4 mb-4 border border-transparent text-subdued gap-x-4 grid-cols-custom-layout max-2xl:grid-cols-custom-layout-md max-xl:grid-cols-custom-layout-sm border-b-hoverBackgroundColor'>
             <span>#</span>
-            <div className='text-sm'>Başlık</div>
+            <div className='text-sm'>Title</div>
             <div></div>
-            <div className='text-sm max-xl:hidden'>Albüm</div>
-            <div className='text-sm max-2xl:hidden'>Eklenme Tarihi</div>
+            <div className='text-sm max-xl:hidden'>Album</div>
+            <div className='text-sm max-2xl:hidden'>Date added</div>
             <div className='relative flex items-center'><div className='absolute left-2'><Time /></div></div>
         </div>
         {

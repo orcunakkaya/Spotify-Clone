@@ -45,7 +45,7 @@ const DotsButton = ({ playlist }) => {
   const handleSelect = (option) => {
     if (option === "edit") {
       setShowEditModal(true);
-    } else if(option === "delete") {
+    } else if (option === "delete") {
       setShowDeleteModal(true);
     }
     toggleDropdown();
@@ -94,43 +94,43 @@ const DotsButton = ({ playlist }) => {
   };
 
   const handleSave = () => {
-    editPlaylist(
-        {
-            id: playlist.id,
-            title: title,
-            description: description,
-            playListImage: image ?? '',
-        }
-    )
-    .then(res => {
-        if(res){
-            setPlaylists((prev) => prev.map((item) => {
-                if(item.id === playlist.id){
-                    return {
-                        ...res
-                    }
-                }
-                return item;
-            }))
-        }
+    editPlaylist({
+      id: playlist.id,
+      title: title,
+      description: description,
+      playListImage: image ?? "",
+    }).then((res) => {
+      if (res) {
+        setPlaylists((prev) =>
+          prev.map((item) => {
+            if (item.id === playlist.id) {
+              return {
+                ...res,
+              };
+            }
+            return item;
+          })
+        );
+      }
     });
     setShowEditModal(false);
-  }
+  };
 
   const handleDeletePlaylist = () => {
-    deletePlaylist({ id: playlist.id })
-        .then(res => {
-            if(res === true){
-                setPlaylists((prev) => prev.filter((item) => item.id !== playlist.id));
-                router.push('/');
-            }
-        })
+    deletePlaylist({ id: playlist.id }).then((res) => {
+      if (res === true) {
+        setPlaylists((prev) => prev.filter((item) => item.id !== playlist.id));
+        router.push("/");
+      }
+    });
     setShowDeleteModal(false);
-  }
+  };
 
   const deleteModalHeader = (
     <div className="flex items-center justify-between mt-3 ml-4 mr-4">
-      <h1 className="text-white text-lg font-bold">Kitaplığın'dan silinsin mi?</h1>
+      <h1 className="text-lg font-bold text-white">
+        Delete from Your Library?
+      </h1>
       <button
         className="hover:bg-tintedBase grid place-items-center rounded-full p-1.5"
         onClick={() => setShowDeleteModal(false)}
@@ -138,34 +138,37 @@ const DotsButton = ({ playlist }) => {
         <Image src="/assets/close.svg" alt="Close" width={16} height={16} />
       </button>
     </div>
-  )
+  );
 
-    const deleteModalContent = (
-        <div className="mx-4 w-[400px]">
-            <b>{title}</b><b>Kitaplığın</b>'dan silinecek.
-        </div>
-    )
-    
-    const deleteModalFooter = (
-        <div className="mx-4 flex gap-4">
-            <button onClick={() => setShowDeleteModal(false)}>İptal</button>
-            <button onClick={() => handleDeletePlaylist()} className="rounded-3xl py-2 px-6 text-black font-bold bg-green hover:scale-110">
-                Kaydet
-            </button>
-        </div>
-    )
+  const deleteModalContent = (
+    <div className="mx-4 w-[400px] text-left">
+      {title} This will delete from Your Library.
+    </div>
+  );
 
-    const modelHeader = (
-        <div className="flex items-center justify-between">
-          <h1 className="text-white text-lg font-bold">Ayrıntıları düzenle</h1>
-          <button
-            className="hover:bg-tintedBase grid place-items-center rounded-full p-1.5"
-            onClick={() => setShowEditModal(false)}
-          >
-            <Image src="/assets/close.svg" alt="Close" width={16} height={16} />
-          </button>
-        </div>
-      );
+  const deleteModalFooter = (
+    <div className="flex gap-4 mx-4">
+      <button onClick={() => setShowDeleteModal(false)}>Cancel</button>
+      <button
+        onClick={() => handleDeletePlaylist()}
+        className="px-6 py-2 font-bold text-black rounded-3xl bg-green hover:scale-110"
+      >
+        Save
+      </button>
+    </div>
+  );
+
+  const modelHeader = (
+    <div className="flex items-center justify-between">
+      <h1 className="text-lg font-bold text-white">Edit details</h1>
+      <button
+        className="hover:bg-tintedBase grid place-items-center rounded-full p-1.5"
+        onClick={() => setShowEditModal(false)}
+      >
+        <Image src="/assets/close.svg" alt="Close" width={16} height={16} />
+      </button>
+    </div>
+  );
 
   const modelContent = (
     <div>
@@ -204,10 +207,10 @@ const DotsButton = ({ playlist }) => {
                 className="absolute left-[80%] bg-transparent border-none border rounded shadow-md z-30 shadow-emptyBox"
                 ref={imageDropdownRef}
               >
-                <ul className="relative min-w-56 p-1 text-subdued whitespace-nowrap text-sm bg-decorativeSubdued border-none rounded">
+                <ul className="relative p-1 text-sm border-none rounded min-w-56 text-subdued whitespace-nowrap bg-decorativeSubdued">
                   <li
                     onClick={() => handleImageSelect("edit")}
-                    className="w-full py-3 pl-3 pr-2 flex items-center gap-2 cursor-pointer hover:bg-hoverBackgroundColor"
+                    className="flex items-center w-full gap-2 py-3 pl-3 pr-2 cursor-pointer hover:bg-hoverBackgroundColor"
                   >
                     <Image
                       src="/assets/edit.svg"
@@ -215,11 +218,11 @@ const DotsButton = ({ playlist }) => {
                       width={16}
                       height={16}
                     />
-                    <span className="text-white">Fotoğrafı değiştir</span>
+                    <span className="text-white">Change photo</span>
                   </li>
                   <li
                     onClick={() => handleImageSelect("delete")}
-                    className="w-full py-3 pl-3 pr-2 flex items-center gap-2 cursor-pointer hover:bg-hoverBackgroundColor"
+                    className="flex items-center w-full gap-2 py-3 pl-3 pr-2 cursor-pointer hover:bg-hoverBackgroundColor"
                   >
                     <Image
                       src="/assets/trash.svg"
@@ -227,7 +230,7 @@ const DotsButton = ({ playlist }) => {
                       width={16}
                       height={16}
                     />
-                    <span className="text-white">Fotoğrafı kaldır</span>
+                    <span className="text-white">Remove photo</span>
                   </li>
                 </ul>
               </div>
@@ -245,9 +248,9 @@ const DotsButton = ({ playlist }) => {
               />
               <label
                 htmlFor="name"
-                className="absolute text-subdued left-4 bg-transparent px-1 text-sm -top-3 invisible peer-focus:visible"
+                className="absolute invisible px-1 text-sm bg-transparent text-subdued left-4 -top-3 peer-focus:visible"
               >
-                Ad
+                Name
               </label>
             </div>
 
@@ -261,9 +264,9 @@ const DotsButton = ({ playlist }) => {
               />
               <label
                 htmlFor="description"
-                className="absolute text-subdued left-4 bg-transparent px-1 text-sm -top-3 invisible peer-focus:visible"
+                className="absolute invisible px-1 text-sm bg-transparent text-subdued left-4 -top-3 peer-focus:visible"
               >
-                Açıklama
+                Description
               </label>
             </div>
           </div>
@@ -279,15 +282,18 @@ const DotsButton = ({ playlist }) => {
   );
 
   const modelFooter = (
-    <button onClick={() => handleSave()} className="rounded-3xl py-2 px-6 bg-white font-bold text-black hover:scale-110">
-      Kaydet
+    <button
+      onClick={() => handleSave()}
+      className="px-6 py-2 font-bold text-black bg-white rounded-3xl hover:scale-110"
+    >
+      Save
     </button>
   );
 
   return (
     <div className="relative flex">
       <button
-        className="text-subdued hover:text-white my-auto"
+        className="my-auto text-subdued hover:text-white"
         id="menu-button"
         onClick={toggleDropdown}
         aria-expanded={isOpen}
@@ -298,7 +304,7 @@ const DotsButton = ({ playlist }) => {
 
       {isOpen && (
         <div
-          className="absolute mt-16 bg-transparent border-none border rounded shadow-md z-10"
+          className="absolute z-10 mt-16 bg-transparent border border-none rounded shadow-md"
           ref={dropdownRef}
         >
           <Dropdown handleSelect={handleSelect} />
@@ -313,16 +319,13 @@ const DotsButton = ({ playlist }) => {
         />
       )}
 
-       {
-        showDeleteModal && (
-          <Modal
-            header={deleteModalHeader}
-            content={deleteModalContent}
-            footer={deleteModalFooter}
-          />
-        )
-       }
-
+      {showDeleteModal && (
+        <Modal
+          header={deleteModalHeader}
+          content={deleteModalContent}
+          footer={deleteModalFooter}
+        />
+      )}
     </div>
   );
 };
