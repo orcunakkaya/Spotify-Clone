@@ -27,7 +27,7 @@ export const PlayerProvider = ({ children }) => {
         },
         body: JSON.stringify({ uris: trackUri }),
       }
-    ).then(res => console.log(res));
+    );
     setIsPlaying(true);
   };
 

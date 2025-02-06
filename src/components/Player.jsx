@@ -87,7 +87,6 @@ const Player = () => {
           if (position === 0 && paused) {
             setIsPlaying(false);
           }
-          console.log("player_state_changed", current_track);
         }
       );
     }
