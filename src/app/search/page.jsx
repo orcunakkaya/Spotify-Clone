@@ -2,27 +2,34 @@ import CategoryCard from "@/components/CategoryCard.jsx";
 import SearchBar from "@/components/SearchBar";
 
 const Home = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/get-token`, {
-    method: "POST",
-    next: { revalidate: 1800 },
-  });
-  const data = await res.json();
-  const token = data.access_token;
+  let categories = [];
 
-  const categoriesResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/spotify/categories`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `${token}`,
-      },
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/get-token`, {
+      method: "POST",
+      next: { revalidate: 1800 },
+    });
+    const data = await res.json();
+    const token = data.access_token;
+
+    const categoriesResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/spotify/categories`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
+    );
+    categories = await categoriesResponse.json();
+
+    if(!res.ok || !categoriesResponse.ok) {
+      throw new Error(`Hata: ${res.status} - ${res.statusText}`);
     }
-  );
-  const categories = await categoriesResponse.json();
-
-  if(!res.ok || !categoriesResponse.ok) {
-    throw new Error(`Hata: ${res.status} - ${res.statusText}`);
+  } catch (error) {
+    throw new Error(`Error fetching music categories`);
   }
+  
 
   return (
     <div>

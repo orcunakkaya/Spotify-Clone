@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-
+import { headers } from 'next/headers';
 export async function GET(request, { params }) {
-  try {
 
-    const accessToken = request.headers.get('Authorization');
+  const accessToken = headers().get('Authorization');
+  try {
 
     if (!accessToken) {
       return NextResponse.json({ error: 'Access token is missing' }, { status: 401 });
