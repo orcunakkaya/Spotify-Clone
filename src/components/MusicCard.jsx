@@ -58,7 +58,7 @@ const MusicCard = ({ music, order }) => {
             </button>
           }
         </span>
-        <Image src={music.image} alt={music.name} width={40} height={40} />
+        <Image src={music.image} alt={music.name} width={40} height={40} className="rounded" priority/>
         <div>
           <div className="overflow-hidden text-base text-white whitespace-normal text-ellipsis line-clamp-1">
             {music.name}

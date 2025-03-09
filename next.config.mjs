@@ -2,7 +2,7 @@
 const nextConfig = {
     experimental: {
       serverActions: {
-        bodySizeLimit: '2mb',
+        bodySizeLimit: '5mb',
       },
     },
     env: {
@@ -27,6 +27,9 @@ const nextConfig = {
           {
             source: "/(.*)",
             headers: [
+              { key: 'Access-Control-Allow-Origin', value: '*' },
+              { key: 'Access-Control-Allow-Methods', value: 'GET, POST, OPTIONS' },
+              { key: 'Access-Control-Allow-Headers', value: 'Content-Type' },
               {
                 key: "Content-Security-Policy",
                 value: `

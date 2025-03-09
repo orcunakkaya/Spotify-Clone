@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-
-export async function POST(req) {
+import { cookies } from "next/headers";
+export async function POST(req, res) {
   const { code, grant_type, redirect_uri } = await req.json();
 
   const client_id = process.env.SPOTIFY_CLIENT_ID;
@@ -19,11 +19,19 @@ export async function POST(req) {
     }),
   });
 
-  const data = await response.json();
-
-  if (data.error) {
-    return NextResponse.json({ error: data.error_description }, { status: 400 });
+  if (!response.ok) {
+    return NextResponse.json({ error: response.statusText }, { status: response.status });
   }
+
+  const data = await response.json();
+  const cookieStore = cookies(); 
+  
+  cookieStore.set('spotify_access_token', data.access_token, {
+    httpOnly: false,
+    secure: true,
+    maxAge: data.expires_in,
+    path: "/",
+  });
 
   return NextResponse.json({ access_token: data.access_token, expires_in: data.expires_in });
 }

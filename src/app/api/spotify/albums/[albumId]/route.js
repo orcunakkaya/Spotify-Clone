@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
-import { headers } from 'next/headers';
+import { headers, cookies } from 'next/headers';
 export async function GET(request, { params }) {
 
   const accessToken = headers().get('Authorization');
   try {
 
     if (!accessToken) {
-      return NextResponse.json({ error: 'Access token is missing' }, { status: 401 });
+      return NextResponse.redirect('/login');
     }
 
     const { albumId } = params;
@@ -24,7 +24,13 @@ export async function GET(request, { params }) {
     });
 
     if (!response.ok) {
-        return NextResponse.json({ error: 'Failed to fetch album details' }, { status: 500 });
+      if(response.status === 401) {
+        const cookieStore = cookies();
+        cookieStore.delete('spotify_access_token');
+        cookieStore.delete('spotify_user');
+        cookieStore.delete('spotify_api_token');
+      }
+      return NextResponse.json({ error: response.statusText }, { status: response.status });
     }
 
     const data = await response.json();
@@ -34,30 +40,3 @@ export async function GET(request, { params }) {
     return NextResponse.json({ error: 'Failed to fetch album details' }, { status: 500 });
   }
 }
-
-
-// useEffect(() => {
-//     const fetchAlbumDetails = async () => {
-//       try {
-//         const accessToken = 'YOUR_ACCESS_TOKEN'; // Access token'ı buraya ekleyin
-//         const response = await fetch(`/api/albums/${params.albumId}`, {
-//           headers: {
-//             Authorization: `Bearer ${accessToken}`,
-//           },
-//         });
-
-//         if (!response.ok) {
-//           throw new Error('Failed to fetch album details');
-//         }
-
-//         const data = await response.json();
-//         setAlbum(data);
-//       } catch (error) {
-//         setError(error.message);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchAlbumDetails();
-//   }, [params.albumId]);

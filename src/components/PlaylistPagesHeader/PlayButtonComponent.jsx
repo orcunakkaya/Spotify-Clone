@@ -16,7 +16,7 @@ const PlayButtonComponent = ({ uris }) => {
   };
 
   return (
-    <button onClick={() => handleSongClick(uris)} className='w-[56px] h-[56px] rounded-full text-black bg-green grid place-items-center hover:scale-110'>
+    <button disabled={uris?.lenght === 0} onClick={() => handleSongClick(uris)} className='w-[56px] h-[56px] rounded-full text-black bg-green grid place-items-center hover:scale-110'>
         <Play width='24' height='24' />
     </button>
   )

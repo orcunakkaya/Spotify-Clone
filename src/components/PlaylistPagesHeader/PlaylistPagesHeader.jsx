@@ -11,7 +11,7 @@ const PlaylistPagesHeader = ({ playlist, type="my playlist", name="Orçun Berkay
             <div className='grid grid-cols-[230px_auto] max-xl:grid-cols-[160px_auto] '>
                 <div className='border-none rounded bg-decorativeSubdued w-[230px] h-[230px] max-xl:w-[160px] max-xl:h-[160px] shadow-emptyBox relative grid place-items-center'>
                     
-                {playlist.playListImage.length > 0 ? (
+                {playlist.playListImage ? (
                     <Image
                         src={playlist.playListImage}
                         alt={playlist.title}
@@ -35,7 +35,7 @@ const PlaylistPagesHeader = ({ playlist, type="my playlist", name="Orçun Berkay
                 <div className='flex flex-col self-end gap-2 ml-6'>
                     <span className='text-sm'>{type === 'my playlist' ? <>Playlist</> : <>{type}</>}</span>
                     <span className='overflow-hidden font-extrabold leading-tight whitespace-normal text-8xl max-xl:text-5xl text-ellipsis line-clamp-1'>{playlist.title}</span>
-                    <span className='text-sm font-bold'>{type === 'my playlist' ? <>Orçun Berkay Akkaya</> : <>{name}</>} • {playlist.playListCount} songs</span>
+                    <span className='text-sm font-bold'>{<>{name}</>} • {playlist.playListCount} songs</span>
                 </div>
             </div>
         </div>

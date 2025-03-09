@@ -7,6 +7,8 @@ export async function getSpotifyLoginUrl() {
     "user-read-private",
     "user-modify-playback-state",
     "user-read-playback-state",
+    "playlist-modify-public",
+    "playlist-modify-private",
   ].join(" ");
 
   const params = new URLSearchParams({

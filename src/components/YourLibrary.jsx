@@ -4,21 +4,35 @@ import React from "react";
 import Library from "../../public/assets/Library";
 import Plus from "../../public/assets/Plus";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
 const LibraryList = dynamic(() => import("./LibraryList"));
-import { createPlaylist } from "@/actions/actions";
-import { usePlaylistContext } from "@/context/PlaylistContext";
 
+import { usePlaylistContext } from "@/context/PlaylistContext";
+import { useAuthContext } from "@/context/AuthContext";
 const YourLibrary = () => {
-  const { playlists, getData, loading } = usePlaylistContext();
+  const router = useRouter();
+  const { playlists, getData } = usePlaylistContext();
+  const { auth, user } = useAuthContext();
 
   const addNewList = async () => {
-    createPlaylist({
-      title: `${playlists.length + 1}.My Playlist`
-    }).then((res) => {
-      getData();
-    }).catch((err) => {
-      console.error('addNewList', err);
-    });
+    if (!user || !auth) return;
+    fetch(`/api/spotify/my-playlist`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${auth}`,
+      },
+      body: JSON.stringify({
+        user_id: user.id,
+      }),
+    })
+      .then((res) => {
+        getData(auth, user);
+      })
+      .catch((err) => {
+        console.error("addNewList", err);
+      });
   }
 
   return (

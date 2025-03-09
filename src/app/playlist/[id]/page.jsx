@@ -2,21 +2,41 @@ import React from "react";
 import MusicCard from "@/components/MusicCard";
 import Time from "../../../../public/assets/Time";
 import PlaylistPagesHeader from "@/components/PlaylistPagesHeader/PlaylistPagesHeader";
+import { notFound, redirect } from "next/navigation";
 const Home = async ({ params }) => {
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/get-token`, { method: 'POST' });
-  const data = await res.json();
-  const token = data.access_token;
+  let playList = {};
+  let playListFiltered = [];
 
-  const playListResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/spotify/get-playlist/${params.id}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `${token}`,
-    },
-  });
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/get-token`, { method: 'POST' });
+    const data = await res.json();
+    const token = data.access_token;
+
+    const playListResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/spotify/get-playlist/${params.id}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
+
+    if(!res.ok || !playListResponse.ok) {
+      if(res.status === 401 || playListResponse.status === 401) {
+        throw new Error(`Authorization Error`);
+      }
+      throw new Error(res.error || playListResponse.error);
+    }
+
+    playList = await playListResponse.json();
+    playListFiltered = playList.tracks.items.filter((item) => item.track !== null);
   
-  const playList = await playListResponse.json();
-  const playListFiltered = playList.tracks.items.filter((item) => item.track !== null);
+  } catch (error) {
+    if(error.message === "Authorization Error") {
+      return redirect("/login");
+    }else{
+        notFound();
+    }
+  }
 
   return (
     <div className="text-white">

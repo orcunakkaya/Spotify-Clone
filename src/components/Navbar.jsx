@@ -7,7 +7,7 @@ import MobileSpotifyLogo from "../../public/assets/MobileSpotifyLogo";
 import Library from "../../public/assets/Library";
 import Search from "../../public/assets/Search";
 import SearchBar from "./SearchBar";
-
+import SettingsButton from './Settings/SettingsButton';
 const Navbar = () => {
   return (
     <>
@@ -63,11 +63,7 @@ const Navbar = () => {
           <div className="grid cursor-pointer text-subdued place-items-center">
             <News />
           </div>
-          <div className="grid h-12 cursor-pointer bg-boxBackgroundColor rounded-3xl min-w-12 place-items-center">
-            <div className="h-8 font-extrabold leading-8 text-center align-middle bg-blue rounded-3xl min-w-8">
-              O
-            </div>
-          </div>
+          <SettingsButton />
         </div>
       </nav>
     </>
@@ -75,3 +71,9 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+{/* <div className="grid h-12 cursor-pointer bg-boxBackgroundColor rounded-3xl min-w-12 place-items-center">
+            <div className="h-8 font-extrabold leading-8 text-center align-middle bg-blue rounded-3xl min-w-8">
+              O
+            </div>
+          </div> */}

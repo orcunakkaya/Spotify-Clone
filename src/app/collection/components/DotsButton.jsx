@@ -5,14 +5,12 @@ import Dots from "../../../../public/assets/Dots.jsx";
 import Dropdown from "./Dropdown";
 import Modal from "@/components/Modal";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { editPlaylist, deletePlaylist } from "@/actions/actions";
 import { usePlaylistContext } from "@/context/PlaylistContext";
+import { useAuthContext } from "@/context/AuthContext";
 
 const DotsButton = ({ playlist }) => {
-  const router = useRouter();
-  const { setPlaylists } = usePlaylistContext();
-
+  const { getData } = usePlaylistContext();
+  const { auth, user } = useAuthContext();
   const [isOpen, setIsOpen] = useState(false);
   const [imageDropdownOpen, setImageDropdownOpen] = useState(false);
 
@@ -94,35 +92,33 @@ const DotsButton = ({ playlist }) => {
   };
 
   const handleSave = () => {
-    editPlaylist({
-      id: playlist.id,
-      title: title,
-      description: description,
-      playListImage: image ?? "",
-    }).then((res) => {
-      if (res) {
-        setPlaylists((prev) =>
-          prev.map((item) => {
-            if (item.id === playlist.id) {
-              return {
-                ...res,
-              };
-            }
-            return item;
-          })
-        );
-      }
-    });
+    
+    fetch(`/api/spotify/get-playlist/${playlist.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${auth}`,
+      },
+      body: JSON.stringify({
+        name: title,
+        description: description,
+      }),
+      next: { revalidate: 0 },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        getData(auth, user)
+      })
+      .catch((err) => {
+        console.error("addNewList", err);
+      });
+
+
+
     setShowEditModal(false);
   };
 
   const handleDeletePlaylist = () => {
-    deletePlaylist({ id: playlist.id }).then((res) => {
-      if (res === true) {
-        setPlaylists((prev) => prev.filter((item) => item.id !== playlist.id));
-        router.push("/");
-      }
-    });
     setShowDeleteModal(false);
   };
 
@@ -204,7 +200,7 @@ const DotsButton = ({ playlist }) => {
 
             {imageDropdownOpen && (
               <div
-                className="absolute left-[80%] bg-transparent border-none border rounded shadow-md z-30 shadow-emptyBox"
+                className="absolute left-[80%] bg-transparent border-none border rounded z-30 shadow-emptyBox"
                 ref={imageDropdownRef}
               >
                 <ul className="relative p-1 text-sm border-none rounded min-w-56 text-subdued whitespace-nowrap bg-decorativeSubdued">

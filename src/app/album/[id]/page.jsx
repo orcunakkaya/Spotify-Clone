@@ -2,25 +2,49 @@ import React from "react";
 import PlaylistPagesHeader from "@/components/PlaylistPagesHeader/PlaylistPagesHeader";
 import Time from "../../../../public/assets/Time";
 import MusicCard from "@/components/MusicCard";
+import { redirect, notFound } from "next/navigation";
+
 
 const Home = async ({ params }) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/get-token`, {
-    method: "POST",
-    next: { revalidate: 1800 },
-  });
-  const data = await res.json();
-  const token = data.access_token;
+  let album = {};
 
-  const albumResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/spotify/albums/${params.id}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `${token}`,
-      },
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/get-token`,
+      {
+        method: "POST",
+        next: { revalidate: 1800 },
+      }
+    );
+    const data = await res.json();
+    const token = data.access_token;
+
+    const albumResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/spotify/albums/${params.id}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
+    );
+
+    if(!res.ok || !albumResponse.ok) {
+      if(res.status === 401 || albumResponse.status === 401) {
+        throw new Error(`Authorization Error`);
+      }
+      throw new Error(playListResponse.error);
     }
-  );
-  const album = await albumResponse.json();
+
+    album = await albumResponse.json();
+    
+  } catch (error) {
+    if(error.message === "Authorization Error") {
+      return redirect("/login");
+    }else{
+        notFound();
+    }
+  }
 
   return (
     <div className="text-white">

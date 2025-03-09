@@ -10,9 +10,9 @@ const PlayListCard = ({ item, hidden }) => {
       className={`group rounded-md p-3 flex flex-col gap-2 hover:bg-highlight`}
     >
       <div className="w-[171px] h-[171px] grid place-items-center self-center relative">
-        {item.image.length > 0 ? (
+        {item.image ? (
           <Image
-            src={item.image.length > 0 ? item.image : "/assets/empty.svg"}
+            src={item.image}
             alt={item.name}
             sizes="171px"
             fill
@@ -22,7 +22,7 @@ const PlayListCard = ({ item, hidden }) => {
           />
         ) : (
           <Image
-            src={item.image.length > 0 ? item.image : "/assets/empty.svg"}
+            src={"/assets/empty.svg"}
             alt={item.name}
             width={64}
             height={64}
