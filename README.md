@@ -6,13 +6,12 @@
 
 ## 🖼 Screenshots
 
-### 🖥 Desktop View – Home Page
+### 🖥 Desktop View
 ![Desktop Screenshot](./public/assets/screenshots/main-page.png)
 
-### 📱 Mobile View – Playlist Page  
-<p align="center">
-  <img src="./public/assets/screenshots/playlist.png" alt="Mobile Screenshot" width="300" />
-</p>
+### 📱 Mobile View
+
+![Desktop Screenshot](./public/assets/screenshots/mobil-previews.jpg)
 
 ## 🛠️ Technologies Used
 
@@ -56,4 +55,5 @@ To run the project locally:
 git clone https://github.com/orcunakkaya/Spotify-Clone.git
 cd Spotify-Clone
 npm install
-npm run dev```
+npm run dev
+```
