@@ -4,14 +4,12 @@ import React from "react";
 import Library from "../../public/assets/Library";
 import Plus from "../../public/assets/Plus";
 import dynamic from "next/dynamic";
-import { useRouter } from "next/navigation";
-import { revalidatePath } from "next/cache";
 const LibraryList = dynamic(() => import("./LibraryList"));
-
 import { usePlaylistContext } from "@/context/PlaylistContext";
 import { useAuthContext } from "@/context/AuthContext";
+
 const YourLibrary = () => {
-  const router = useRouter();
+
   const { playlists, getData } = usePlaylistContext();
   const { auth, user } = useAuthContext();
 

@@ -9,7 +9,8 @@ const SearchBar = () => {
   const pathName = usePathname();
 
   const [search, setSearch] = useState('');
-
+  console.log("pathName",pathName);
+  console.log("search",search);
   const handleSearch = () => {
     if(pathName.startsWith('/search')) return;
     router.push('/search');
@@ -36,7 +37,7 @@ const SearchBar = () => {
         className="block bg-boxBackgroundColor min-w-full rounded-3xl border-0 py-1.5 h-12 pl-9 pr-4 text-linkColor placeholder:linkColor sm:text-sm sm:leading-6 indent-3
         max-lg:rounded-md max-lg:text-black max-lg:bg-white
         "
-        placeholder="Ne çalmak istiyorsun?"
+        placeholder="What do you want to play?"
         onClick={() => handleSearch()}
         onChange={(e) => setSearch(e.target.value)}
         onKeyDown={(e) => e.key === 'Enter' && changeUrl()}

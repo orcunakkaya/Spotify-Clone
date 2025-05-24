@@ -6,7 +6,7 @@ import { notFound, redirect } from "next/navigation";
 
 const Home = async ({ params }) => {
   let queryFiltered = [];
-
+  let trackFiltered = [];
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/get-token`,
@@ -28,8 +28,18 @@ const Home = async ({ params }) => {
       }
     );
 
-    if(!res.ok || !queryResponse.ok) {
-      if(res.status === 401 || queryResponse.status === 401) {
+    const trackResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/spotify/search?query=${params.query}&type=track&limit=5`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
+    );
+
+    if(!res.ok || !queryResponse.ok || !trackResponse.ok) {
+      if(res.status === 401 || queryResponse.status === 401 || trackResponse.status === 401) {
         throw new Error(`Authorization Error`);
       }
       throw new Error(res.error || queryResponse.error);
@@ -37,6 +47,9 @@ const Home = async ({ params }) => {
 
     const query = await queryResponse.json();
     queryFiltered = query.playlists.items.filter((i) => i !== null);
+
+    const track = await trackResponse.json();
+    trackFiltered = track.tracks.items.filter((i) => i !== null)
 
   } catch (error) {
     if(error.message === "Authorization Error") {
@@ -54,6 +67,29 @@ const Home = async ({ params }) => {
         </Link>
         <SearchBar />
       </div>
+      {trackFiltered?.map((single) => (
+        <Link
+          href={`/album/${single.album.id}`}
+          key={single.id}
+          className="grid grid-flow-col grid-cols-[48px_1fr] gap-2 h-16"
+        >
+          <Image
+            src={single?.album?.images[0]?.url || "/assets/empty.svg"}
+            alt={single.name}
+            width={48}
+            height={48}
+            className="self-center"
+          />
+          <div className="grid self-center text-start">
+            <div className="whitespace-normal text-ellipsis line-clamp-1">
+              {single.name}
+            </div>
+            <div className="text-xs whitespace-normal text-subdued text-ellipsis line-clamp-1">
+              {single.artists.map(i => i.name).join(', ')}
+            </div>
+          </div>
+        </Link>
+      ))}
       {queryFiltered.map((playlist) => (
         <Link
           href={`/playlist/${playlist.id}`}
@@ -61,7 +97,7 @@ const Home = async ({ params }) => {
           className="grid grid-flow-col grid-cols-[48px_1fr] gap-2 h-16"
         >
           <Image
-            src={playlist.images[0].url}
+            src={playlist?.images[0]?.url || "/assets/empty.svg"}
             alt={playlist.name}
             width={48}
             height={48}

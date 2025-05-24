@@ -238,7 +238,7 @@ const DotsButton = ({ playlist }) => {
                 type="text"
                 id="name"
                 className="peer w-[100%] bg-tintedBase border-none rounded-md px-4 pt-2 pb-2 text-sm  focus:outline-none focus:border-white text-subdued"
-                placeholder="Ad ekle"
+                placeholder="Add Name"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
@@ -254,7 +254,7 @@ const DotsButton = ({ playlist }) => {
               <textarea
                 id="description"
                 className="peer w-[100%] h-full bg-tintedBase border-white rounded-md px-4 pt-2 pb-2 text-sm  focus:outline-none focus:border-white text-subdued resize-none"
-                placeholder="İsteğe bağlı açıklama ekle"
+                placeholder="Add optional description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />

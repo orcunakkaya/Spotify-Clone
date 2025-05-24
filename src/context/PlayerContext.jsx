@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, createContext, useContext } from "react";
+import Cookies from 'js-cookie';
+import { useRouter } from "next/navigation";
 
 const PlayerContext = createContext();
 
@@ -9,6 +11,7 @@ export const usePlayerContext = () => {
 };
 
 export const PlayerProvider = ({ children }) => {
+  const router = useRouter();
   const [player, setPlayer] = useState(null);
   const [currentTrack, setCurrentTrack] = useState(null); // O an çalan şarkı
   const [isPlaying, setIsPlaying] = useState(false); // Çalma durumu
@@ -27,7 +30,14 @@ export const PlayerProvider = ({ children }) => {
         },
         body: JSON.stringify({ uris: trackUri }),
       }
-    );
+    ).then(res => {
+    if(res.status === 401){
+      Cookies.remove('spotify_api_token', { path: '/' });
+      Cookies.remove('spotify_access_token', { path: '/' });
+      Cookies.remove('spotify_user', { path: '/' });
+      router.push("/login");
+    }
+    })
     setIsPlaying(true);
   };
 

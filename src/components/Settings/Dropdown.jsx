@@ -4,13 +4,13 @@ import React, { useState, useEffect, useRef } from "react";
 import Share from "../../../public/assets/Share";
 import Image from "next/image";
 
-const Dropdown = ({ handleSelect }) => {
+const Dropdown = ({ handleSelect, setIsOpen }) => {
     
   return (
     <>
     <ul className="relative p-1 text-sm border-none rounded max-lg:p-4 max-lg:w-full max-lg:h-full min-w-56 text-subdued whitespace-nowrap max-lg:rounded-none max-lg:bg-black bg-decorativeSubdued">
-      <li className="items-center justify-end hidden w-full gap-2 py-3 pl-3 pr-2 cursor-pointer max-lg:flex">
-        <button className="text-white">
+      <li className="items-center justify-end hidden w-full gap-2 py-3 pl-3 pr-2 max-lg:flex">
+        <button className="text-white cursor-pointer" onClick={() => setIsOpen(false)}>
           <Image src="/assets/close.svg" alt="Close" width={24} height={24} />
         </button>
       </li>

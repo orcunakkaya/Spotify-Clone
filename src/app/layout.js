@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { Inter } from "next/font/google";
 import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
@@ -18,6 +19,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          src="https://sdk.scdn.co/spotify-player.js"
+          strategy="beforeInteractive"
+        />
+      </head>
       <body
         className={`${inter.className} bg-pageBackgroundColor h-screen overflow-hidden relative max-lg:overflow-auto max-lg:h-full`}
       >

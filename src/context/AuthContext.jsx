@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
     const timer = setTimeout(() => {
       checkLogin();
       setLoading(false);
-    }, 2500);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, [Cookies]);

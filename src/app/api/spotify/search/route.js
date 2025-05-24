@@ -12,6 +12,7 @@ export async function GET(request) {
     const url = new URL(request.url);
     const query = url.searchParams.get('query');
     const type = url.searchParams.get('type');
+    const limit = url.searchParams.get('limit') || 20;
 
     if (!query || !type) {
       return NextResponse.json(
@@ -21,7 +22,7 @@ export async function GET(request) {
     }
  
     const response = await fetch(
-      `https://api.spotify.com/v1/search?q=${query}&type=${type}&limit=20`,
+      `https://api.spotify.com/v1/search?q=${query}&type=${type}&limit=${limit}`,
       {
         method: 'GET',
         headers: {

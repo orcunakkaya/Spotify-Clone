@@ -1,12 +1,12 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import getRandromColor from "@/utils/Color.jsx";
+import getRandromColor from "@/utils/color.js";
 const CategoryCard = ({ category, index }) => {
   return (
     <Link
       href={`/genre/${category.name}`}
-      className="p-3 w-full h-48 rounded-lg relative overflow-hidden"
+      className="relative w-full h-48 p-3 overflow-hidden rounded-lg"
       style={{ backgroundColor: getRandromColor() }}
     >
       <Image
@@ -18,7 +18,7 @@ const CategoryCard = ({ category, index }) => {
         className="rounded-lg h-auto max-h-32 w-1/3 max-w-32 absolute -right-5 -bottom-5 rotate-[25deg]"
       />
 
-      <div className="absolute top-4 left-4 text-white font-bold text-2xl">
+      <div className="absolute text-2xl font-bold text-white top-4 left-4">
         {category.name}
       </div>
     </Link>

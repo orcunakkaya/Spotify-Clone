@@ -101,8 +101,9 @@ export default async function Home() {
 
   return (
     <div className="text-white">
+      
       <div className="justify-between hidden py-3 pl-1 pr-4 max-lg:flex">
-        <div>user name</div>
+        <div className="text-lg font-bold">{JSON.parse(user?.value)?.display_name || "user name"}</div>
         <SettingsButton />
       </div>
       <Slider>

@@ -30,17 +30,22 @@ const MusicCard = ({ music, order }) => {
     };
   }, []);
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (event) => {
+    event.stopPropagation();
     setIsOpen((prev) => !prev);
   };
 
-  const handleSelect = (option) => {
-    setIsOpen(false);
+  const handleSelect = (event) => {
+    event.stopPropagation();
   };
 
   const handleSongClick = (trackUri) => {
     playSong([trackUri], auth, deviceId);
     setAllTracks([]);
+  };
+
+  const isMobile = () => {
+    return window.innerWidth <= 1024;
   };
 
   return (
@@ -49,6 +54,12 @@ const MusicCard = ({ music, order }) => {
         className={`group text-subdued hover:text-white grid grid-cols-custom-layout px-4 gap-x-4 border border-transparent h-14 items-center max-2xl:grid-cols-custom-layout-md max-xl:grid-cols-custom-layout-sm ${
           !isOpen && "hover:bg-hoverBackgroundColor"
         } rounded ${isOpen && "bg-tinted text-white"}`}
+        onClick={() => {
+            if(isMobile()) {
+              handleSongClick(music.uri)
+            }
+          }
+        }
       >
         <span className="text-base group-hover:hidden">{order + 1}</span>
         <span className="hidden text-white group-hover:block">
@@ -73,7 +84,7 @@ const MusicCard = ({ music, order }) => {
         <div className="text-sm max-2xl:hidden text-subdued">
           {music.release_date}
         </div>
-        <div className="relative flex justify-between flex-nowrap gap-x-2">
+        <div className="flex justify-between lg:relative flex-nowrap gap-x-2">
           <div className="text-sm whitespace-normal text-ellipsis line-clamp-1 text-subdued">
             {msToMinutesAndSeconds(music.duration_ms)}
           </div>
@@ -89,11 +100,12 @@ const MusicCard = ({ music, order }) => {
           </button>
           {isOpen && (
             <div
-              className="absolute right-0 z-10 mt-8 bg-transparent border border-none rounded shadow-md"
+              className="absolute right-0 z-10 mt-8 bg-transparent border border-none rounded shadow-md max-lg:w-full max-lg:h-full max-lg:top-0 max-lg:m-0 max-lg:fixed"
               ref={dropdownRef}
+              onClick={(e) => e.stopPropagation()}
             >
               <Dropdown
-                onSelect={handleSelect}
+                handleSelect={handleSelect}
                 music={music}
                 setIsMainOpen={setIsOpen}
               />

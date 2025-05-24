@@ -24,7 +24,7 @@ const SettingsButton = () => {
     if(user) {
       setUserName(user?.display_name);
     }
-  }, [Cookies])
+  }, [])
 
   return (
     <div >
@@ -49,7 +49,7 @@ const SettingsButton = () => {
           className="absolute z-10 max-lg:-translate-x-full bg-transparent border border-none rounded shadow-md -ml-44 max-lg:m-0 max-lg:-mt-[50px] max-lg:ml-[54px] max-lg:w-full max-lg:h-full"
           ref={dropdownRef}
         >
-          <Dropdown handleSelect={handleSelect} />
+          <Dropdown handleSelect={handleSelect} setIsOpen={setIsOpen} />
         </div>
       )}
     </div>

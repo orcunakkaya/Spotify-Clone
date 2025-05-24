@@ -3,6 +3,9 @@ import MusicCard from "@/components/MusicCard";
 import Time from "../../../../public/assets/Time";
 import PlaylistPagesHeader from "@/components/PlaylistPagesHeader/PlaylistPagesHeader";
 import { notFound, redirect } from "next/navigation";
+
+export const revalidate = 0;
+
 const Home = async ({ params }) => {
 
   let playList = {};
@@ -18,6 +21,7 @@ const Home = async ({ params }) => {
       headers: {
         Authorization: `${token}`,
       },
+      cache: "no-store",
     });
 
     if(!res.ok || !playListResponse.ok) {
